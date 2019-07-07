@@ -10,13 +10,12 @@
         class="time-block"
         :class="`time-block__${time}`"
       >
-        <div
-          class="tense"
+        <Tense
           v-for="tense in [['simple'], ['continuous'], ['perfect'], ['perfect', 'continuous'] ]"
           :key="tense.join('_')"
-          :class="[`tense_${time}`, tense.map((t) => `tense_${t}`)]">
-          {{time}} {{tense.map((t) => t).join(' ')}}
-        </div>
+          :time="time"
+          :tense="tense"
+        />
       </div>
     </div>
   </div>
@@ -26,11 +25,13 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import Tense from '../../components/Tense'
   import PhraseConstructor from '../../components/PhraseConstructor'
 
   export default Vue.extend({
     components: {
-      PhraseConstructor
+      PhraseConstructor,
+      Tense
     },
     data: () => {
       return {

@@ -6,10 +6,12 @@ export const isShortVowel = (char) => ['i', 'o', 'u'].indexOf(char.toLowerCase()
 
 export const getSecondForm = (verb) => {
   let index = irregularVerbs.first.indexOf(verb)
-  const lastChar  = verb.charAt(verb.length - 1)
+  const lastChar = verb.charAt(verb.length - 1)
 
   if (index !== -1) {
     return irregularVerbs.second[i]
+  } else {
+    return ''
   }
 
   if (lastChar === 'e') {

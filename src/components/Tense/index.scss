@@ -1,0 +1,58 @@
+@import '../../assets/style/utils';
+
+$color: #663399;
+$pad: 1em;
+
+.tense {
+  position: relative;
+  width: 25%;
+  cursor: pointer;
+  font-size: 2.4rem;
+  display: flex;
+  overflow: hidden;
+  &:hover {
+    box-shadow: 0 .3rem .5rem rgba(black, .2);
+    z-index: 1;
+  }
+}
+.tense_past {
+  background: adjust-hue( $color, 65% );
+}
+.tense_present {
+  background: $color;
+}
+.tense_future {
+  background: adjust-hue( $color, -70% );
+}
+
+.tense_perfect {
+  text-shadow: .1rem .1rem .1rem blue;
+}
+
+.tense_continuous {
+  color: pink;
+}
+
+.front {
+  @include stretch;
+
+  background: rgba(black, .2);
+  width: 100%;
+  padding: $pad;
+  transition: .3s ease transform;
+
+  .tense:hover & {
+    transform: translateX(-5%);
+  }
+
+
+  .content:hover + & {
+    transform: translateX(-100%);
+  }
+}
+
+.content {
+  background: rgba(black, .2);
+  width: 100%;
+  padding: $pad;
+}
