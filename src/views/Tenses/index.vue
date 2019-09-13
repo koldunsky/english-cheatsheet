@@ -15,7 +15,9 @@
           :key="tense.join('_')"
           :time="time"
           :tense="tense"
-        />
+        >
+          {{convertVerb(`${time}_${tense.join('_')}`, verb)}}
+        </Tense>
       </div>
     </div>
   </div>
@@ -25,8 +27,12 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import camelCase from 'lodash/camelCase'
+  import { mapState } from 'vuex'
+
   import Tense from '../../components/Tense'
   import PhraseConstructor from '../../components/PhraseConstructor'
+  import verbConverter from '../../utils/verbConverter'
 
   export default Vue.extend({
     components: {
@@ -36,6 +42,12 @@
     data: () => {
       return {
         times: ['past', 'present', 'future']
+      }
+    },
+    computed: mapState(['verb']),
+    methods: {
+      convertVerb (tense: string, verb: string): string {
+        return verbConverter(verb)[camelCase(tense)]
       }
     }
   })

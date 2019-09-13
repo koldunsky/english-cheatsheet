@@ -4,7 +4,7 @@
      :class="[`tense_${time}`, tense.map((t) => `tense_${t}`)]"
   >
     <div class="content">
-      content
+      <slot>content</slot>
     </div>
     <div class="front">
       {{time}} {{tense.map((t) => t).join(' ')}}
@@ -14,9 +14,6 @@
 
 <script lang="ts">
   export default {
-    components: {
-
-    },
     props: ['tense', 'time']
   }
 </script>
