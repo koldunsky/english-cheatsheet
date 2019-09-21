@@ -7,12 +7,12 @@
   import Mixin from '../mixin'
 
   export default {
-    mixins: [Mixin],
+    mixins: [ Mixin ],
     data () {
       return {}
     },
     computed: {
-      negative() {
+      negative () {
         return (<div></div>)
       }
     }

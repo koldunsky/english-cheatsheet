@@ -2,9 +2,16 @@ import findLastIndex from 'lodash/findLastIndex'
 import last from 'lodash/last'
 import irregularVerbs from './irregularVerbs'
 
-export const isVowel = (char: string) => ['a', 'e', 'i', 'o', 'u'].includes(char.toLowerCase())
+export const isVowel = (char: string): boolean => {
+  if (!char) {
+    console.trace()
+    throw new Error(`${char} is undefined`)
+  }
 
-const getLastVowelIndex = (verb: string) => {
+  return ['a', 'e', 'i', 'o', 'u'].includes(char.toLowerCase())
+}
+
+const getLastVowelIndex = (verb: string): number => {
   return findLastIndex(verb.split(''), isVowel)
 }
 
@@ -18,7 +25,7 @@ const countVowels = (verb: string): number => {
   }, 0)
 }
 
-export const lastShortVowel = (verb: string) => {
+export const lastShortVowel = (verb: string): boolean => {
   let weight = 0
   const lastVowelIndex = getLastVowelIndex(verb)
   const lastChar: string | undefined = last(verb.split(''))
@@ -49,13 +56,41 @@ export const lastShortVowel = (verb: string) => {
   return weight > 3
 }
 
-export const getSecondForm = (verb: string) => {
+export const getSecondForm = (verb: string): string => {
+  if (!verb) {
+    return ''
+  }
+
   let index = irregularVerbs.first.indexOf(verb)
-  const lastChar = verb.charAt(verb.length - 1)
 
   if (index !== -1) {
     return irregularVerbs.second[index]
   }
+
+  return getRegularVerPastForm(verb)
+}
+
+export const getThirdForm = (verb: string): string => {
+  if (!verb) {
+    return ''
+  }
+
+  let index = irregularVerbs.first.indexOf(verb)
+
+  if (index !== -1) {
+    return irregularVerbs.third[index]
+  }
+
+  return getRegularVerPastForm(verb)
+}
+
+export const getRegularVerPastForm = (verb: string): string => {
+  if (irregularVerbs.first.includes(verb)) {
+    console.warn(verb, 'is irregular verb, to convert verb use `getThirdForm` or `getSecondForm` instead')
+    return '*see console*'
+  }
+
+  const lastChar = verb.charAt(verb.length - 1)
 
   if (lastChar === 'e') {
     return `${verb}d`
@@ -77,14 +112,31 @@ export const getSecondForm = (verb: string) => {
   return `${verb}ed`
 }
 
-export const getGerund = (verb: string) => `${verb}ing`
-
-export const getThirdForm = (verb: string) => {
-  return verb
-}
+export const getGerund = (verb: string): string => `${verb}ing`
 
 interface ITenses {
   [key: string]: string;
+}
+
+interface IVerbConverterMap {
+  [key: string]: (verb: string) => string;
+}
+
+export const getVerbIn: IVerbConverterMap = {
+  presentSimple: (verb: string): string => verb,
+  presentContinuous: getGerund,
+  presentPerfect: getThirdForm,
+  presentPerfectContinuous: getGerund,
+
+  pastSimple: getSecondForm,
+  pastContinuous: getGerund,
+  pastPerfect: getThirdForm,
+  pastPerfectContinuous: getGerund,
+
+  futureSimple: (verb: string): string => verb,
+  futureContinuous: getGerund,
+  futurePerfect: getThirdForm,
+  futurePerfectContinuous: getGerund
 }
 
 export default (verb: string): ITenses => ({
