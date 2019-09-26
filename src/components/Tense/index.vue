@@ -60,7 +60,7 @@
 
       phrase (): string {
         if (!this.phraseForm) {
-          return 'wrong'
+          return '-_-'
         }
         return this[this.phraseForm]()
       }

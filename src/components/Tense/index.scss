@@ -1,6 +1,6 @@
 @import '../../assets/style/utils';
 
-$color: #fff;
+$color: #12121c;
 $pad: 1em;
 
 .tense {
@@ -10,6 +10,7 @@ $pad: 1em;
   font-size: 2.4rem;
   display: flex;
   overflow: hidden;
+
   &:hover {
     box-shadow: 0 .3rem .5rem rgba(black, .2);
     z-index: 1;
@@ -26,11 +27,11 @@ $pad: 1em;
 }
 
 .tense_perfect {
-  text-shadow: .1rem .1rem .1rem blue;
+  text-decoration: underline;
 }
 
 .tense_continuous {
-  color: pink;
+  font-style: italic;
 }
 
 .front {

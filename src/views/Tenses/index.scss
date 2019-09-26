@@ -3,7 +3,6 @@
 .tenses {
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
@@ -12,14 +11,9 @@
 .tenses-grid {
   flex: 1 0 auto;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   justify-content: stretch;
   align-items: stretch;
-}
-
-.phrase-constructor {
-
 }
 
 .time-block {
@@ -34,9 +28,6 @@
 .phrase-constructor {
   outline: 1px solid lime;
 }
-
-
-
 
 // Delete later
 .word {
