@@ -14,12 +14,18 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import Component from 'vue-class-component'
+  import _get from 'lodash/get'
   import { getVerbIn } from '@/utils/verbConverter'
   import camelCase from 'lodash/camelCase'
+  import convertPronoun from '@/utils/convertPronoun'
+  import phraseSequentor from '@/utils/phraseSequentor'
+  import getAuxillary from '@/utils/getAuxillary'
 
-  type phraseForm = 'adjective' | 'negative' | 'question' | ''
+  type TPhraseForm = 'adjective' | 'negative' | 'question' | ''
+  type TTense = Array<string>
 
-  export default Vue.extend({
+  const AppProps = Vue.extend({
     props: {
       tense: {
         type: Array
@@ -34,64 +40,85 @@
         type: String
       },
       phraseForm: {
-        type: Object as () => phraseForm
-      }
-    },
-    computed: {
-      convertedVerb (): string {
-        const {
-          time,
-          tense,
-          verb
-        } = this
-
-        return getVerbIn[camelCase(`${time}_${tense.join('_')}`)](verb)
-      },
-
-      convertedPronoun (): string {
-        const map: {[key: string]: string} = {
-          first: 'I',
-          second: 'you',
-          third: 'it',
-          third_plural: 'they'
-        }
-        return map[this.pronoun]
-      },
-
-      phrase (): string {
-        if (!this.phraseForm) {
-          return '-_-'
-        }
-        return this[this.phraseForm]()
-      }
-    },
-    methods: {
-      adjective (): string {
-        const {
-          convertedPronoun,
-          convertedVerb
-        } = this
-
-        return `${convertedPronoun} ${convertedVerb}`
-      },
-      negative (): string {
-        const {
-          convertedPronoun,
-          convertedVerb
-        } = this
-
-        return `${convertedPronoun} ${convertedVerb}`
-      },
-      question (): string {
-        const {
-          convertedPronoun,
-          convertedVerb
-        } = this
-
-        return `${convertedPronoun} ${convertedVerb}`
+        type: String
       }
     }
   })
+
+  @Component({
+
+  })
+
+  export default class Tense extends AppProps {
+    get convertedVerb (): string {
+      const {
+        time,
+        tense,
+        verb
+      } = this
+
+      return getVerbIn[camelCase(`${time}_${tense.join('_')}`)](verb)
+    }
+
+    get convertedPronoun (): string {
+      return convertPronoun(this.pronoun)
+    }
+
+    get camelCaseTense () : string {
+      const {
+        time,
+        tense
+      } = this
+
+      return camelCase(`${time}_${tense.join('_')}`)
+    }
+    get auxiallary () {
+      const {
+        camelCaseTense,
+        phraseForm,
+        pronoun
+      } = this
+      const suitableAuxiliary: string = _get(getAuxillary, [camelCaseTense, phraseForm, pronoun], 'D_D')
+      return suitableAuxiliary
+    }
+
+    get phrase (): string {
+      if (!this.phraseForm) {
+        return '-_-'
+      }
+
+      return _get(this, this.phraseForm, () => 'Y_Y')()
+    }
+
+    azazaMethod (type: string): string {
+      const {
+        convertedPronoun,
+        convertedVerb,
+        camelCaseTense,
+        auxiallary
+      } = this
+
+      const result = _get(phraseSequentor, [camelCaseTense, type], null)
+
+      if (!result) {
+        return 'S_S'
+      }
+
+      return result(convertedPronoun, auxiallary, convertedVerb)
+    }
+
+    adjective (): string {
+      return this.azazaMethod('adjective')
+    }
+
+    negative (): string {
+      return this.azazaMethod('negative')
+    }
+
+    question (): string {
+      return this.azazaMethod('question')
+    }
+  }
 </script>
 
 <style lang="scss" src="./index.scss"></style>

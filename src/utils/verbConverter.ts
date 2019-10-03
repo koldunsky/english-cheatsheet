@@ -5,7 +5,6 @@ import irregularVerbs from './irregularVerbs'
 export const isVowel = (char: string): boolean => {
   if (!char) {
     console.trace()
-    throw new Error(`${char} is undefined`)
   }
 
   return ['a', 'e', 'i', 'o', 'u'].includes(char.toLowerCase())

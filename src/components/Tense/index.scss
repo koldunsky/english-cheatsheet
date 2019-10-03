@@ -10,6 +10,7 @@ $pad: 1em;
   font-size: 2.4rem;
   display: flex;
   overflow: hidden;
+  background: $color;
 
   &:hover {
     box-shadow: 0 .3rem .5rem rgba(black, .2);
@@ -17,14 +18,14 @@ $pad: 1em;
   }
 }
 .tense_past {
-  background: adjust-hue( $color, 65% );
+  //background: adjust-hue( $color, 65% );
 }
 .tense_present {
-  background: $color;
+  //background: $color;
 }
 .tense_future {
-  background: adjust-hue( $color, -70% );
-}
+  //background: adjust-hue( $color, -70% );
+}s
 
 .tense_perfect {
   text-decoration: underline;
