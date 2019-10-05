@@ -16,14 +16,12 @@
   import Vue from 'vue'
   import Component from 'vue-class-component'
   import _get from 'lodash/get'
-  import { getVerbIn } from '@/utils/verbConverter'
+  import { getVerbIn, TPhraseForm } from '@/utils/verbConverter'
   import camelCase from 'lodash/camelCase'
   import convertPronoun from '@/utils/convertPronoun'
   import phraseSequentor from '@/utils/phraseSequentor'
   import getAuxillary from '@/utils/getAuxillary'
-
-  type TPhraseForm = 'adjective' | 'negative' | 'question' | ''
-  type TTense = Array<string>
+  import { TOneOfTenses } from '@/types'
 
   const AppProps = Vue.extend({
     props: {
@@ -40,37 +38,35 @@
         type: String
       },
       phraseForm: {
-        type: String
+        type: Object as () => TPhraseForm
       }
     }
   })
 
-  @Component({
-
-  })
+  @Component
 
   export default class Tense extends AppProps {
     get convertedVerb (): string {
       const {
-        time,
-        tense,
-        verb
+        verb,
+        camelCaseTense,
+        phraseForm
       } = this
 
-      return getVerbIn[camelCase(`${time}_${tense.join('_')}`)](verb)
+      return getVerbIn[camelCaseTense][phraseForm](verb)
     }
 
     get convertedPronoun (): string {
       return convertPronoun(this.pronoun)
     }
 
-    get camelCaseTense () : string {
+    get camelCaseTense (): TOneOfTenses {
       const {
         time,
         tense
       } = this
 
-      return camelCase(`${time}_${tense.join('_')}`)
+      return camelCase(`${time}_${tense.join('_')}`) as TOneOfTenses
     }
     get auxiallary () {
       const {
@@ -78,7 +74,8 @@
         phraseForm,
         pronoun
       } = this
-      const suitableAuxiliary: string = _get(getAuxillary, [camelCaseTense, phraseForm, pronoun], 'D_D')
+
+      const suitableAuxiliary: string = _get(getAuxillary, `${camelCaseTense}.${phraseForm}.${pronoun}`, 'D_D')
       return suitableAuxiliary
     }
 

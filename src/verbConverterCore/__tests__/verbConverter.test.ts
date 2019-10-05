@@ -1,4 +1,4 @@
-import { getSecondForm } from '../verbConverter'
+import getSecondForm from '../getSecondForm'
 
 const secondsForms = [
   'begged',

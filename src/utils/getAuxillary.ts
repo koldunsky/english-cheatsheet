@@ -1,4 +1,4 @@
-interface IPhraseForm {
+interface TPronoun {
   first: string;
   second: string;
   third: string;
@@ -6,7 +6,7 @@ interface IPhraseForm {
 }
 
 type TTense = {
-  [key: string]: IPhraseForm
+  [key: string]: TPronoun
 }
 
 const presentSimple: TTense = {
@@ -96,9 +96,29 @@ const presentPerfectContinuous: TTense = {
   }
 }
 
+const pastSimple: TTense = {
+  adjective: {
+    first: 'did',
+    second: 'did',
+    third: 'does',
+    third_plural: 'did'
+  },
+  negative: {
+    first: `wasn't`,
+    second: `weren't`,
+    third: `wasn't`,
+    third_plural: `weren't`
+  },
+  get question () {
+    return this.adjective
+  }
+}
+
 export default {
   presentSimple,
   presentContinuous,
   presentPerfect,
-  presentPerfectContinuous
+  presentPerfectContinuous,
+
+  pastSimple
 }

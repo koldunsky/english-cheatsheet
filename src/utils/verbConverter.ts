@@ -1,14 +1,11 @@
 import findLastIndex from 'lodash/findLastIndex'
 import last from 'lodash/last'
-import irregularVerbs from './irregularVerbs'
+import isVowel from '../verbConverterCore/isVowel'
+import getSecondForm from '../verbConverterCore/getSecondForm'
+import getThirdForm from '../verbConverterCore/getThirdForm'
+import { IPhraseForms, ITensesWithPhraseForms } from '@/types'
 
-export const isVowel = (char: string): boolean => {
-  if (!char) {
-    console.trace()
-  }
-
-  return ['a', 'e', 'i', 'o', 'u'].includes(char.toLowerCase())
-}
+export type TPhraseForm = 'adjective' | 'negative' | 'question'
 
 const getLastVowelIndex = (verb: string): number => {
   return findLastIndex(verb.split(''), isVowel)
@@ -55,102 +52,45 @@ export const lastShortVowel = (verb: string): boolean => {
   return weight > 3
 }
 
-export const getSecondForm = (verb: string): string => {
-  if (!verb) {
-    return ''
-  }
-
-  let index = irregularVerbs.first.indexOf(verb)
-
-  if (index !== -1) {
-    return irregularVerbs.second[index]
-  }
-
-  return getRegularVerPastForm(verb)
-}
-
-export const getThirdForm = (verb: string): string => {
-  if (!verb) {
-    return ''
-  }
-
-  let index = irregularVerbs.first.indexOf(verb)
-
-  if (index !== -1) {
-    return irregularVerbs.third[index]
-  }
-
-  return getRegularVerPastForm(verb)
-}
-
-export const getRegularVerPastForm = (verb: string): string => {
-  if (irregularVerbs.first.includes(verb)) {
-    console.warn(verb, 'is irregular verb, to convert verb use `getThirdForm` or `getSecondForm` instead')
-    return '*see console*'
-  }
-
-  const lastChar = verb.charAt(verb.length - 1)
-
-  if (lastChar === 'e') {
-    return `${verb}d`
-  }
-
-  if (lastChar === 'y' && !isVowel(verb.charAt(verb.length - 2))) {
-    return `${verb.slice(0, -1)}ied`
-  }
-
-  if (lastChar === 'l') {
-    return `${verb}led`
-  }
-
-  if (lastShortVowel(verb)) {
-    const lastChar = last(verb.split(''))
-    return `${verb}${lastChar}ed`
-  }
-
-  return `${verb}ed`
-}
-
 export const getGerund = (verb: string): string => `${verb}ing`
 
-interface ITenses {
-  [key: string]: string;
+type TTransformFunction = (verb: string) => string;
+
+/*
+{
+  adjective: null,
+  negative: null,
+  question: null
 }
+*/
 
-interface IVerbConverterMap {
-  [key: string]: (verb: string) => string;
-}
+type TGeneric = any;
 
-export const getVerbIn: IVerbConverterMap = {
-  presentSimple: (verb: string): string => verb,
-  presentContinuous: getGerund,
-  presentPerfect: getThirdForm,
-  presentPerfectContinuous: getGerund,
-
-  pastSimple: getSecondForm,
-  pastContinuous: getGerund,
-  pastPerfect: getThirdForm,
-  pastPerfectContinuous: getGerund,
-
-  futureSimple: (verb: string): string => verb,
-  futureContinuous: getGerund,
-  futurePerfect: getThirdForm,
-  futurePerfectContinuous: getGerund
-}
-
-export default (verb: string): ITenses => ({
-  presentSimple: verb,
-  presentContinuous: getGerund(verb),
-  presentPerfect: getThirdForm(verb),
-  presentPerfectContinuous: getGerund(verb),
-
-  pastSimple: getSecondForm(verb),
-  pastContinuous: getGerund(verb),
-  pastPerfect: getThirdForm(verb),
-  pastPerfectContinuous: getGerund(verb),
-
-  futureSimple: verb,
-  futureContinuous: getGerund(verb),
-  futurePerfect: getThirdForm(verb),
-  futurePerfectContinuous: getGerund(verb)
+const oneForAllPhraseForms = (entity: TGeneric): IPhraseForms<TGeneric> => ({
+  adjective: entity,
+  negative: entity,
+  question: entity
 })
+
+const dontTransform = (verb: string) => verb
+
+export const getVerbIn: ITensesWithPhraseForms<TTransformFunction> = {
+  presentSimple: oneForAllPhraseForms(dontTransform),
+  presentContinuous: oneForAllPhraseForms(getGerund),
+  presentPerfect: oneForAllPhraseForms(getThirdForm),
+  presentPerfectContinuous: oneForAllPhraseForms(getGerund),
+
+  pastSimple: {
+    adjective: getSecondForm,
+    negative: dontTransform,
+    question: dontTransform
+  },
+  pastContinuous: oneForAllPhraseForms(getGerund),
+  pastPerfect: oneForAllPhraseForms(getThirdForm),
+  pastPerfectContinuous: oneForAllPhraseForms(getGerund),
+
+  futureSimple: oneForAllPhraseForms(dontTransform),
+  futureContinuous: oneForAllPhraseForms(getGerund),
+  futurePerfect: oneForAllPhraseForms(getThirdForm),
+  futurePerfectContinuous: oneForAllPhraseForms(getGerund)
+}
