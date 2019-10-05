@@ -28,7 +28,6 @@
         placeholder="Type verb in base form"
         @input="onChangeVerb"
       >
-      <button>Go!</button>
     </form>
   </div>
 </template>
