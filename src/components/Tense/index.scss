@@ -13,7 +13,6 @@ $pad: 1em;
   background: $color;
 
   &:hover {
-    box-shadow: 0 .3rem .5rem rgba(black, .2);
     z-index: 1;
   }
 }
@@ -25,7 +24,7 @@ $pad: 1em;
 }
 .tense_future {
   //background: adjust-hue( $color, -70% );
-}s
+}
 
 .tense_perfect {
   text-decoration: underline;
@@ -58,4 +57,54 @@ $pad: 1em;
   width: 100%;
   padding: $pad;
   padding-top: 100px;
+}
+
+.icon {
+  width: 0;
+  height: 0;
+}
+
+.icon_future {
+  color: rgb(97, 191, 123);
+}
+
+.icon_present {
+  color: rgb(229, 191, 60);
+}
+
+
+.icon_past {
+  color: rgb(252, 91, 87);
+}
+
+.icon_simple {
+  border: .4rem solid currentColor;
+  border-radius: 1rem;
+}
+
+.icon_continuous {
+  border: .5rem solid transparent;
+  border-left-color: currentColor;
+  position: relative;
+}
+
+.icon_perfect {
+  border: .4rem solid currentColor;
+  border-left-color: currentColor;
+  position: relative;
+}
+
+.icon_perfect-continuous {
+  border: .5rem solid transparent;
+  border-left-color: currentColor;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    height: 1rem;
+    width: .2rem;
+    background: currentColor;
+    top: -.5rem;
+  }
 }

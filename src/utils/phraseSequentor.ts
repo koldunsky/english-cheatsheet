@@ -4,23 +4,24 @@ type TSequentorFn = (pronoun: string, auxiliary: string, mainVerb: string, extra
 
 interface IPhraseSequentorTense extends IPhraseForms<TSequentorFn> {
 }
+const adjective: TSequentorFn = (pronoun, auxiliary, mainVerb) => (`${pronoun} ${mainVerb}`)
 
 const presentSimple: IPhraseSequentorTense = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  adjective,
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
 
 const presentPerfect: IPhraseSequentorTense = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
 
 const presentContinuous: IPhraseSequentorTense = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
 
 const presentPerfectContinuous: IPhraseSequentorTense = {
@@ -30,46 +31,46 @@ const presentPerfectContinuous: IPhraseSequentorTense = {
 }
 
 const pastSimple: IPhraseSequentorTense = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  adjective,
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
 
-const pastContinuous = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+const pastContinuous: IPhraseSequentorTense = {
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
-const pastPerfect = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+const pastPerfect: IPhraseSequentorTense = {
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
-const pastPerfectContinuous = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+const pastPerfectContinuous: IPhraseSequentorTense = {
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
 
-const futureSimple = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+const futureSimple: IPhraseSequentorTense = {
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
-const futureContinuous = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+const futureContinuous: IPhraseSequentorTense = {
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
-const futurePerfect = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+const futurePerfect: IPhraseSequentorTense = {
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
-const futurePerfectContinuous = {
-  adjective: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  negative: (pronoun: string, auxiliary: string, mainVerb: string) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  question: (pronoun: string, auxiliary: string, mainVerb: string) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+const futurePerfectContinuous: IPhraseSequentorTense = {
+  adjective: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
+  question: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
 }
 
 const allTheStuff: ITensesWithPhraseForms<TSequentorFn> = {

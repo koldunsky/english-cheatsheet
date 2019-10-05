@@ -1,3 +1,5 @@
+import { ITensesWithPhraseForms, IPhraseForms } from '@/types'
+
 interface TPronoun {
   first: string;
   second: string;
@@ -5,11 +7,9 @@ interface TPronoun {
   third_plural: string;
 }
 
-type TTense = {
-  [key: string]: TPronoun
-}
+interface ITense extends IPhraseForms<TPronoun> {}
 
-const presentSimple: TTense = {
+const presentSimple: ITense = {
   adjective: {
     first: '',
     second: '',
@@ -32,7 +32,7 @@ const presentSimple: TTense = {
   }
 }
 
-const presentContinuous: TTense = {
+const presentContinuous: ITense = {
   adjective: {
     first: 'am',
     second: 'are',
@@ -50,7 +50,7 @@ const presentContinuous: TTense = {
   }
 }
 
-const presentPerfect: TTense = {
+const presentPerfect: ITense = {
   adjective: {
     first: 'have',
     second: 'have',
@@ -73,7 +73,7 @@ const presentPerfect: TTense = {
   }
 }
 
-const presentPerfectContinuous: TTense = {
+const presentPerfectContinuous: ITense = {
   adjective: {
     first: 'have been',
     second: 'have been',
@@ -96,7 +96,7 @@ const presentPerfectContinuous: TTense = {
   }
 }
 
-const pastSimple: TTense = {
+const pastSimple: ITense = {
   adjective: {
     first: 'did',
     second: 'did',
@@ -114,11 +114,145 @@ const pastSimple: TTense = {
   }
 }
 
+const pastContinuous: ITense = {
+  adjective: {
+    first: 'was',
+    second: 'were',
+    third: 'was',
+    third_plural: 'were'
+  },
+  negative: {
+    first: `A_A`,
+    second: `A_A`,
+    third: `A_A`,
+    third_plural: `A_A`
+  },
+  get question () {
+    return this.adjective
+  }
+}
+
+const pastPerfect: ITense = {
+  adjective: {
+    first: 'A_A',
+    second: 'A_A',
+    third: 'A_A',
+    third_plural: 'A_A'
+  },
+  negative: {
+    first: `A_A`,
+    second: `A_A`,
+    third: `A_A`,
+    third_plural: `A_A`
+  },
+  get question () {
+    return this.adjective
+  }
+}
+
+const pastPerfectContinuous: ITense = {
+  adjective: {
+    first: 'A_A',
+    second: 'A_A',
+    third: 'A_A',
+    third_plural: 'A_A'
+  },
+  negative: {
+    first: `A_A`,
+    second: `A_A`,
+    third: `A_A`,
+    third_plural: `A_A`
+  },
+  get question () {
+    return this.adjective
+  }
+}
+
+const futureSimple: ITense = {
+  adjective: {
+    first: 'will',
+    second: 'will',
+    third: 'will',
+    third_plural: 'will'
+  },
+  negative: {
+    first: `won't`,
+    second: `won't`,
+    third: `won't`,
+    third_plural: `won't`
+  },
+  get question () {
+    return this.adjective
+  }
+}
+
+const futureContinuous: ITense = {
+  adjective: {
+    first: 'A_A',
+    second: 'A_A',
+    third: 'A_A',
+    third_plural: 'A_A'
+  },
+  negative: {
+    first: `A_A`,
+    second: `A_A`,
+    third: `A_A`,
+    third_plural: `A_A`
+  },
+  get question () {
+    return this.adjective
+  }
+}
+
+const futurePerfect: ITense = {
+  adjective: {
+    first: 'A_A',
+    second: 'A_A',
+    third: 'A_A',
+    third_plural: 'A_A'
+  },
+  negative: {
+    first: `A_A`,
+    second: `A_A`,
+    third: `A_A`,
+    third_plural: `A_A`
+  },
+  get question () {
+    return this.adjective
+  }
+}
+
+const futurePerfectContinuous: ITense = {
+  adjective: {
+    first: 'A_A',
+    second: 'A_A',
+    third: 'A_A',
+    third_plural: 'A_A'
+  },
+  negative: {
+    first: `A_A`,
+    second: `A_A`,
+    third: `A_A`,
+    third_plural: `A_A`
+  },
+  get question () {
+    return this.adjective
+  }
+}
+
 export default {
   presentSimple,
   presentContinuous,
   presentPerfect,
   presentPerfectContinuous,
 
-  pastSimple
-}
+  pastSimple,
+  pastContinuous,
+  pastPerfect,
+  pastPerfectContinuous,
+
+  futureSimple,
+  futureContinuous,
+  futurePerfect,
+  futurePerfectContinuous
+} as ITensesWithPhraseForms<TPronoun>

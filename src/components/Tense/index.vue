@@ -7,7 +7,16 @@
       {{phrase}}
     </div>
     <div class="front">
-      {{time}} {{tense.map((t) => t).join(' ')}}
+      <div class="tenseName">
+        <div
+          class="icon"
+          :class="[
+            `icon_${time}`,
+            `icon_${tense.join('-')}`
+          ]"
+        />
+        {{time}} {{tense.map((t) => t).join(' ')}}
+      </div>
     </div>
   </div>
 </template>
