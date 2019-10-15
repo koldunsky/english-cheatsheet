@@ -29,7 +29,9 @@
   import camelCase from 'lodash/camelCase'
   import convertPronoun from '@/utils/convertPronoun'
   import phraseSequentor from '@/utils/phraseSequentor'
-  import getAuxillary from '@/utils/getAuxillary'
+  import getAuxiliary from '@/utils/getAuxiliary'
+  import getSecondAuxiliary from '@/utils/getSecondAuxiliary'
+  import getToBeVerb from '@/utils/getToBeVerb'
   import { TOneOfTenses } from '@/types'
 
   const AppProps = Vue.extend({
@@ -77,14 +79,36 @@
 
       return camelCase(`${time}_${tense.join('_')}`) as TOneOfTenses
     }
-    get auxiallary () {
+    get auxiliary () {
       const {
         camelCaseTense,
         phraseForm,
         pronoun
       } = this
 
-      const suitableAuxiliary: string = _get(getAuxillary, `${camelCaseTense}.${phraseForm}.${pronoun}`, 'D_D')
+      const suitableAuxiliary: string = _get(getAuxiliary, `${camelCaseTense}.${phraseForm}.${pronoun}`, 'D_D')
+      return suitableAuxiliary
+    }
+
+    get toBeVerb () {
+      const {
+        camelCaseTense,
+        phraseForm,
+        pronoun
+      } = this
+
+      const verb: string = _get(getToBeVerb, `${camelCaseTense}.${phraseForm}.${pronoun}`, 'B_B')
+      return verb
+    }
+
+    get secondAuxiliary () {
+      const {
+        camelCaseTense,
+        phraseForm,
+        pronoun
+      } = this
+
+      const suitableAuxiliary: string = _get(getSecondAuxiliary, `${camelCaseTense}.${phraseForm}.${pronoun}`, '')
       return suitableAuxiliary
     }
 
@@ -93,7 +117,7 @@
         return '-_-'
       }
 
-      return _get(this, this.phraseForm, () => 'Y_Y')()
+      return this.azazaMethod(this.phraseForm)
     }
 
     azazaMethod (type: string): string {
@@ -101,28 +125,18 @@
         convertedPronoun,
         convertedVerb,
         camelCaseTense,
-        auxiallary
+        auxiliary,
+        secondAuxiliary,
+        toBeVerb
       } = this
 
       const result = _get(phraseSequentor, [camelCaseTense, type], null)
 
       if (!result) {
-        return 'S_S'
+        return 'R_R'
       }
 
-      return result(convertedPronoun, auxiallary, convertedVerb)
-    }
-
-    adjective (): string {
-      return this.azazaMethod('adjective')
-    }
-
-    negative (): string {
-      return this.azazaMethod('negative')
-    }
-
-    question (): string {
-      return this.azazaMethod('question')
+      return result(convertedPronoun, convertedVerb, auxiliary, toBeVerb, secondAuxiliary)
     }
   }
 </script>
