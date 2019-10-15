@@ -5,7 +5,7 @@ import getSecondForm from '../verbConverterCore/getSecondForm'
 import getThirdForm from '../verbConverterCore/getThirdForm'
 import { IPhraseForms, ITensesWithPhraseForms } from '@/types'
 
-export type TPhraseForm = 'adjective' | 'negative' | 'question'
+export type TPhraseForm = 'affirmative' | 'negative' | 'interrogative'
 
 const getLastVowelIndex = (verb: string): number => {
   return findLastIndex(verb.split(''), isVowel)
