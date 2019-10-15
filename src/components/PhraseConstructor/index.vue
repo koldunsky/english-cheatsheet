@@ -16,10 +16,10 @@
         class="control select phrase-form"
         @change="onChangePhraseForm"
       >
-        <option value="default">Choose phrase form</option>
-        <option value="adjective">adjective</option>
+        <option value="default">Choose a type of a sentence</option>
+        <option value="affirmative">affirmative</option>
         <option value="negative">negative</option>
-        <option value="question">question</option>
+        <option value="interrogative">interrogative</option>
       </select>
 
       <input
