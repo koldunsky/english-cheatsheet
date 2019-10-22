@@ -16,7 +16,8 @@ const secondsForms = [
   'wrapped',
   'fixed',
   'played',
-  'plowed'
+  'plowed',
+  'sail'
 ]
 const firstForms = [
   'beg',
@@ -34,7 +35,8 @@ const firstForms = [
   'wrap',
   'fix',
   'play',
-  'plow'
+  'plow',
+  'sailed'
 ]
 
 firstForms.forEach((word: string, i: number) => {
