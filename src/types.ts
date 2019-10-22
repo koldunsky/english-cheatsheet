@@ -13,9 +13,9 @@ export type TOneOfTenses =
 'futurePerfectContinuous'
 
 export interface IPhraseForms<T> {
-  adjective: T;
+  affirmative: T;
   negative: T;
-  question: T;
+  interrogative: T;
 }
 
 export interface ITensesList<T> {

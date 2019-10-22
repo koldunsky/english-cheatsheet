@@ -56,20 +56,12 @@ export const getGerund = (verb: string): string => `${verb}ing`
 
 type TTransformFunction = (verb: string) => string;
 
-/*
-{
-  adjective: null,
-  negative: null,
-  question: null
-}
-*/
-
-type TGeneric = any;
+type TGeneric = TTransformFunction;
 
 const oneForAllPhraseForms = (entity: TGeneric): IPhraseForms<TGeneric> => ({
-  adjective: entity,
+  affirmative: entity,
   negative: entity,
-  question: entity
+  interrogative: entity
 })
 
 const dontTransform = (verb: string) => verb
@@ -81,9 +73,9 @@ export const getVerbIn: ITensesWithPhraseForms<TTransformFunction> = {
   presentPerfectContinuous: oneForAllPhraseForms(getGerund),
 
   pastSimple: {
-    adjective: getSecondForm,
+    affirmative: getSecondForm,
     negative: dontTransform,
-    question: dontTransform
+    interrogative: dontTransform
   },
   pastContinuous: oneForAllPhraseForms(getGerund),
   pastPerfect: oneForAllPhraseForms(getThirdForm),
