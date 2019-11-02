@@ -52,7 +52,15 @@ export const lastShortVowel = (verb: string): boolean => {
   return weight > 3
 }
 
-export const getGerund = (verb: string): string => `${verb}ing`
+export const getContinuousForm = (verb: string): string => {
+  if (verb[verb.length - 1] === 'e' && verb[verb.length - 2] !== 'e') {
+    return `${verb.slice(0, -1)}ing`
+  }
+
+  return `${verb}ing`
+}
+
+export const getGerund = getContinuousForm
 
 type TTransformFunction = (verb: string) => string;
 
