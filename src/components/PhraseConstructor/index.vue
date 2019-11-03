@@ -53,7 +53,11 @@
         this.setPhraseForm(e.target.value)
       },
       onChangeVerb (e) {
-        this.setVerb(e.target.value.toLowerCase())
+        const { value } = e.target
+        if (!value) {
+          return
+        }
+        this.setVerb(value.toLowerCase())
       },
       onSubmit (e) {
         console.info('111', e)

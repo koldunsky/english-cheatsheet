@@ -1,5 +1,4 @@
 import findLastIndex from 'lodash/findLastIndex'
-import last from 'lodash/last'
 import isVowel from '../verbConverterCore/isVowel'
 import getSecondForm from '../verbConverterCore/getSecondForm'
 import getThirdForm from '../verbConverterCore/getThirdForm'
@@ -9,6 +8,10 @@ export type TPhraseForm = 'affirmative' | 'negative' | 'interrogative'
 
 const getLastVowelIndex = (verb: string): number => {
   return findLastIndex(verb.split(''), isVowel)
+}
+
+const getPreLastChar = (verb: string) => {
+  return verb.slice(-2)[0]
 }
 
 const countVowels = (verb: string): number => {
@@ -24,19 +27,24 @@ const countVowels = (verb: string): number => {
 export const lastShortVowel = (verb: string): boolean => {
   let weight = 0
   const lastVowelIndex = getLastVowelIndex(verb)
-  const lastChar: string | undefined = last(verb.split(''))
+
+  if (lastVowelIndex === -1) {
+    return false
+  }
+
+  const lastChar: string = verb.slice(-1)
 
   if (countVowels(verb) < 2) {
     weight++
   }
 
   // Соседи не гласные
-  if (!isVowel(verb[lastVowelIndex - 1]) && !isVowel(verb[lastVowelIndex + 1])) {
+  if (!isVowel(verb[lastVowelIndex - 1])) {
     weight++
   }
 
   // Короткое слово
-  if (verb.length < 5) {
+  if (verb.length < 5 && verb.length > 2) {
     weight++
   }
 
@@ -53,8 +61,25 @@ export const lastShortVowel = (verb: string): boolean => {
 }
 
 export const getContinuousForm = (verb: string): string => {
-  if (verb[verb.length - 1] === 'e' && verb[verb.length - 2] !== 'e') {
+  if (verb === 'be') {
+    debugger
+  }
+
+  if (verb.slice(-2) === 'ie') {
+    return `${verb.slice(0, -2)}ying`
+  }
+
+  if (verb.slice(-1) === 'e' && getPreLastChar(verb) !== 'e' && verb.length > 2) {
     return `${verb.slice(0, -1)}ing`
+  }
+
+  if (lastShortVowel(verb)) {
+    const lastChar = verb.slice(-1)
+    return `${verb}${lastChar}ing`
+  }
+
+  if (verb.slice(-2) === 'ic') {
+    return `${verb.slice(0, -2)}icking`
   }
 
   return `${verb}ing`

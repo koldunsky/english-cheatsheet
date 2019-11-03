@@ -1,4 +1,25 @@
 import getSecondForm from '../getSecondForm'
+var tensify = require('tensify')
+
+const firstForms = [
+  'beg',
+  'blur',
+  'flip',
+  'plan',
+  'stop',
+  'thin',
+  'rub',
+  'split',
+  'step',
+  'stir',
+  'swim',
+  'tap',
+  'wrap',
+  'fix',
+  'play',
+  'plow',
+  'sail'
+]
 
 const secondsForms = [
   'begged',
@@ -17,30 +38,11 @@ const secondsForms = [
   'fixed',
   'played',
   'plowed',
-  'sail'
-]
-const firstForms = [
-  'beg',
-  'blur',
-  'flip',
-  'plan',
-  'stop',
-  'thin',
-  'rub',
-  'split',
-  'step',
-  'stir',
-  'swim',
-  'tap',
-  'wrap',
-  'fix',
-  'play',
-  'plow',
   'sailed'
 ]
 
 firstForms.forEach((word: string, i: number) => {
   test(word, () => {
-    expect(getSecondForm(word)).toBe(secondsForms[i])
+    expect(tensify(word).past).toBe(secondsForms[i])
   })
 })

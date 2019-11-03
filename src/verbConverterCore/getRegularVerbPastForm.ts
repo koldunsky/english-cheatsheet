@@ -1,6 +1,5 @@
 import irregularVerbs from '@/verbConverterCore/irregularVerbsList'
 import isVowel from '@/verbConverterCore/isVowel'
-import last from 'lodash/last'
 import { lastShortVowel } from '@/utils/verbConverter'
 
 export default (verb: string): string => {
@@ -19,12 +18,8 @@ export default (verb: string): string => {
     return `${verb.slice(0, -1)}ied`
   }
 
-  if (lastChar === 'l') {
-    return `${verb}led`
-  }
-
   if (lastShortVowel(verb)) {
-    const lastChar = last(verb.split(''))
+    const lastChar = verb.slice(-1)
     return `${verb}${lastChar}ed`
   }
 

@@ -49,7 +49,7 @@
         type: String
       },
       phraseForm: {
-        type: Object as () => TPhraseForm
+        type: String as () => TPhraseForm
       }
     }
   })

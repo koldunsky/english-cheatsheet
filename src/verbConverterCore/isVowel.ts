@@ -1,5 +1,6 @@
 export default (char: string): boolean => {
   if (!char) {
+    console.info(char)
     console.trace()
   }
 

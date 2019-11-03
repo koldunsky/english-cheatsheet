@@ -6,8 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     verb: '',
-    pronoun: '',
-    phraseForm: ''
+    pronoun: 'first',
+    phraseForm: 'affirmative'
   },
   mutations: {
     setVerb (state, verb) {
