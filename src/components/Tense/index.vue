@@ -86,7 +86,7 @@
         pronoun
       } = this
 
-      const suitableAuxiliary: string = _get(getAuxiliary, `${camelCaseTense}.${phraseForm}.${pronoun}`, 'D_D')
+      const suitableAuxiliary: string = _get(getAuxiliary, `${camelCaseTense}.${phraseForm}.${pronoun}`, '')
       return suitableAuxiliary
     }
 
@@ -97,7 +97,7 @@
         pronoun
       } = this
 
-      const verb: string = _get(getToBeVerb, `${camelCaseTense}.${phraseForm}.${pronoun}`, 'B_B')
+      const verb: string = _get(getToBeVerb, `${camelCaseTense}.${phraseForm}.${pronoun}`, '')
       return verb
     }
 
@@ -136,7 +136,9 @@
         return 'R_R'
       }
 
-      return result(convertedPronoun, convertedVerb, auxiliary, toBeVerb, secondAuxiliary)
+      console.info(camelCaseTense, type, ': ', convertedPronoun, convertedVerb, auxiliary, toBeVerb, secondAuxiliary)
+      console.info('======')
+      return result(convertedPronoun, convertedVerb, auxiliary, secondAuxiliary, toBeVerb)
     }
   }
 </script>

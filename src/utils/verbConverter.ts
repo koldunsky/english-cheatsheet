@@ -25,8 +25,13 @@ const countVowels = (verb: string): number => {
 }
 
 export const lastShortVowel = (verb: string): boolean => {
+  if (verb === 'forget') {
+    debugger
+  }
+
   let weight = 0
   const lastVowelIndex = getLastVowelIndex(verb)
+  const theCharAfterLastVowel = verb[lastVowelIndex + 1]
 
   if (lastVowelIndex === -1) {
     return false
@@ -35,12 +40,12 @@ export const lastShortVowel = (verb: string): boolean => {
   const lastChar: string = verb.slice(-1)
 
   if (countVowels(verb) < 2) {
-    weight++
+    weight = weight + 0.5
   }
 
   // Соседи не гласные
-  if (!isVowel(verb[lastVowelIndex - 1])) {
-    weight++
+  if (!isVowel(verb[lastVowelIndex - 1]) && theCharAfterLastVowel ? !isVowel(theCharAfterLastVowel) : true) {
+    weight = weight + 1.5
   }
 
   // Короткое слово
@@ -48,7 +53,7 @@ export const lastShortVowel = (verb: string): boolean => {
     weight++
   }
 
-  //  Согласная стоит ближе к концу
+  //  Гласная стоит близко к концу
   if (verb.length - lastVowelIndex <= 2) {
     weight++
   }
@@ -61,9 +66,9 @@ export const lastShortVowel = (verb: string): boolean => {
 }
 
 export const getContinuousForm = (verb: string): string => {
-  if (verb === 'be') {
-    debugger
-  }
+  // if (verb === 'forget') {
+  //   debugger
+  // }
 
   if (verb.slice(-2) === 'ie') {
     return `${verb.slice(0, -2)}ying`
@@ -73,13 +78,13 @@ export const getContinuousForm = (verb: string): string => {
     return `${verb.slice(0, -1)}ing`
   }
 
+  if (verb.slice(-2) === 'ic') {
+    return `${verb.slice(0, -2)}icking`
+  }
+
   if (lastShortVowel(verb)) {
     const lastChar = verb.slice(-1)
     return `${verb}${lastChar}ing`
-  }
-
-  if (verb.slice(-2) === 'ic') {
-    return `${verb.slice(0, -2)}icking`
   }
 
   return `${verb}ing`

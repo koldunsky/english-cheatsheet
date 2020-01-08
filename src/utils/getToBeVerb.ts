@@ -56,7 +56,7 @@ const pastSimple: ITense = {
     third: ``,
     third_plural: ``
   },
-  get interrogative() {
+  get interrogative () {
     return this.affirmative
   }
 }
@@ -74,22 +74,16 @@ const pastContinuous: ITense = {
     third: `wasn't`,
     third_plural: `weren't`
   },
-  get interrogative() {
-    return this.affirmative
-  }
-}
-
-const pastPerfect: ITense = {
-  affirmative: oneForAll('had'),
-  negative: oneForAll(`hadn't`),
   get interrogative () {
     return this.affirmative
   }
 }
 
 const pastPerfectContinuous: ITense = {
-  affirmative: oneForAll('had'),
-  negative: oneForAll(`hadn't`),
+  affirmative: oneForAll('been'),
+  get negative () {
+    return this.affirmative
+  },
   get interrogative () {
     return this.affirmative
   }
@@ -120,8 +114,10 @@ const futurePerfect: ITense = {
 }
 
 const futurePerfectContinuous: ITense = {
-  affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  affirmative: oneForAll('been'),
+  get negative () {
+    return this.affirmative
+  },
   get interrogative () {
     return this.affirmative
   }
@@ -133,11 +129,11 @@ export default {
 
   pastSimple,
   pastContinuous,
-  pastPerfect,
+  // pastPerfect,
   pastPerfectContinuous,
 
-  futureSimple,
-  futureContinuous,
-  futurePerfect,
+  // futureSimple,
+  // futureContinuous,
+  // futurePerfect,
   futurePerfectContinuous
 } as ITensesWithPhraseForms<IPronoun>

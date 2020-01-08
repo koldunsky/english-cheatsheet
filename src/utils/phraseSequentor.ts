@@ -2,9 +2,9 @@ import { IPhraseForms, ITensesWithPhraseForms } from '../types'
 
 type TSequentorFn = (pronoun: string, mainVerb: string, auxiliary?: string, have?: string, toBe?: string) => string;
 
-interface IPhraseSequentorTense extends IPhraseForms<TSequentorFn> {
-}
-const affirmative: TSequentorFn = (pronoun, mainVerb, auxiliary, have, toBe) => (`${pronoun} ${auxiliary} ${toBe} ${mainVerb}`)
+interface IPhraseSequentorTense extends IPhraseForms<TSequentorFn> {}
+
+const affirmative: TSequentorFn = (pronoun, mainVerb, auxiliary, have, toBe) => (`${pronoun} ${auxiliary} ${have} ${toBe} ${mainVerb}`)
 
 const presentSimple: IPhraseSequentorTense = {
   affirmative,

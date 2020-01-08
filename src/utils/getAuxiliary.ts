@@ -40,24 +40,6 @@ const presentSimple: ITense = {
   }
 }
 
-const presentContinuous: ITense = {
-  affirmative: {
-    first: 'am',
-    second: 'are',
-    third: 'is',
-    third_plural: 'are'
-  },
-  negative: {
-    first: `am not`,
-    second: `aren't (are not)`,
-    third: `isn't (is not)`,
-    third_plural: `aren't (are not)`
-  },
-  get interrogative() {
-    return this.affirmative
-  }
-}
-
 const presentPerfect: ITense = {
   affirmative: {
     first: 'have',
@@ -71,7 +53,7 @@ const presentPerfect: ITense = {
     third: `hasn't (has not)`,
     third_plural: `haven't (have not)`
   },
-  get interrogative() {
+  get interrogative () {
     return {
       first: 'have',
       second: 'have',
@@ -94,49 +76,13 @@ const presentPerfectContinuous: ITense = {
     third: `hasn't`,
     third_plural: `haven't`
   },
-  get interrogative() {
+  get interrogative () {
     return {
       first: 'have',
       second: 'have',
       third: 'has',
       third_plural: 'have'
     }
-  }
-}
-
-const pastSimple: ITense = {
-  affirmative: {
-    first: '',
-    second: '',
-    third: '',
-    third_plural: ''
-  },
-  negative: {
-    first: ``,
-    second: ``,
-    third: ``,
-    third_plural: ``
-  },
-  get interrogative() {
-    return this.affirmative
-  }
-}
-
-const pastContinuous: ITense = {
-  affirmative: {
-    first: 'was',
-    second: 'were',
-    third: 'was',
-    third_plural: 'were'
-  },
-  negative: {
-    first: `wasn't`,
-    second: `weren't`,
-    third: `wasn't`,
-    third_plural: `weren't`
-  },
-  get interrogative() {
-    return this.affirmative
   }
 }
 
@@ -190,12 +136,12 @@ const futurePerfectContinuous: ITense = {
 
 export default {
   presentSimple,
-  presentContinuous,
+  // presentContinuous,
   presentPerfect,
   presentPerfectContinuous,
 
-  pastSimple,
-  pastContinuous,
+  // pastSimple,
+  // pastContinuous,
   pastPerfect,
   pastPerfectContinuous,
 
