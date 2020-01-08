@@ -4,7 +4,14 @@
      :class="[`tense_${time}`, tense.map((t) => `tense_${t}`)]"
   >
     <div class="content">
-      {{phrase}}
+<!--      {{phrase}}-->
+      <span
+        v-for="type in order"
+        :key="type"
+        :class="[`word_type_${type}`]"
+      >
+        {{phraseObject[type]}}
+      </span>
     </div>
     <div class="front">
       <div class="tenseName">
@@ -112,33 +119,39 @@
       return suitableAuxiliary
     }
 
-    get phrase (): string {
-      if (!this.phraseForm) {
-        return '-_-'
-      }
+    get order () {
+      const {
+        camelCaseTense,
+        phraseForm
+      } = this
 
-      return this.azazaMethod(this.phraseForm)
+      return _get(phraseSequentor, [camelCaseTense, phraseForm], ['pronoun', 'pronoun', 'pronoun'])
     }
 
-    azazaMethod (type: string): string {
+    get phraseObject () {
       const {
         convertedPronoun,
         convertedVerb,
         camelCaseTense,
         auxiliary,
         secondAuxiliary,
-        toBeVerb
+        toBeVerb,
+        phraseForm
       } = this
 
-      const result = _get(phraseSequentor, [camelCaseTense, type], null)
-
-      if (!result) {
-        return 'R_R'
+      console.info(camelCaseTense, phraseForm, ': ', convertedPronoun, convertedVerb, auxiliary, toBeVerb, secondAuxiliary)
+      console.info('======')
+      const phraseObject = {
+        pronoun: convertedPronoun,
+        mainVerb: convertedVerb,
+        auxiliary: auxiliary,
+        have: secondAuxiliary,
+        toBe: toBeVerb
       }
 
-      console.info(camelCaseTense, type, ': ', convertedPronoun, convertedVerb, auxiliary, toBeVerb, secondAuxiliary)
-      console.info('======')
-      return result(convertedPronoun, convertedVerb, auxiliary, secondAuxiliary, toBeVerb)
+      console.info(phraseObject)
+
+      return phraseObject
     }
   }
 </script>
