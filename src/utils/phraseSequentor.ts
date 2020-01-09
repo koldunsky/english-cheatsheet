@@ -5,7 +5,7 @@ type TPhraseOrder = Array<'pronoun' | 'mainVerb' | 'auxiliary' | 'have' | 'toBe'
 interface IPhraseSequentorTense extends IPhraseForms<TPhraseOrder> {}
 
 // `${pronoun} ${auxiliary} ${have} ${toBe} ${mainVerb}
-const affirmative: TPhraseOrder = ['pronoun', 'mainVerb', 'auxiliary', 'have', 'toBe']
+const affirmative: TPhraseOrder = ['pronoun', 'auxiliary', 'have', 'toBe', 'mainVerb']
 // 'pronoun', 'auxiliary', 'have', 'toBe', 'mainVerb'
 
 const presentSimple: IPhraseSequentorTense = {
@@ -44,7 +44,7 @@ const pastContinuous: IPhraseSequentorTense = {
   interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }
 const pastPerfect: IPhraseSequentorTense = {
-  affirmative,
+  affirmative: ['pronoun', 'have', 'mainVerb'],
   negative: ['pronoun', 'auxiliary', 'mainVerb'],
   interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }

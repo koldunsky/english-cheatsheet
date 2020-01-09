@@ -4,7 +4,6 @@
      :class="[`tense_${time}`, tense.map((t) => `tense_${t}`)]"
   >
     <div class="content">
-<!--      {{phrase}}-->
       <span
         v-for="type in order"
         :key="type"
