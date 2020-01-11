@@ -1,16 +1,16 @@
 <template>
   <div
      class="tense"
-     :class="[`tense_${time}`, tense.map((t) => `tense_${t}`)]"
+     :class="[`tense_${time}`, tense.map((t) => `tense_${t}`), `tense_${time}-${tense.join('-')}`]"
   >
     <div class="content">
       <span
-        v-for="type in order"
+        v-for="(type, index) in order"
         :key="type"
+        class="word"
         :class="[`word_type_${type}`]"
       >
-        {{phraseObject[type]}}
-      </span>
+        {{ index === 0 ? capitalize(phraseObject[type]) : phraseObject[type]}}</span><span class="end-of-phrase" v-if="phraseForm === 'interrogative'">?</span>
     </div>
     <div class="front">
       <div class="tenseName">
@@ -23,6 +23,11 @@
         />
         {{time}} {{tense.map((t) => t).join(' ')}}
       </div>
+      <div
+        class="sequence"
+      >
+        {{rawOrder.join(', ')}}
+      </div>
     </div>
   </div>
 </template>
@@ -34,11 +39,12 @@
   import { getVerbIn, TPhraseForm } from '@/utils/verbConverter'
   import camelCase from 'lodash/camelCase'
   import convertPronoun from '@/utils/convertPronoun'
-  import phraseSequentor from '@/utils/phraseSequentor'
+  import phraseSequentor, { TPhraseOrder } from '@/utils/phraseSequentor'
   import getAuxiliary from '@/utils/getAuxiliary'
   import getSecondAuxiliary from '@/utils/getPerfectAuxiliary'
   import getToBeVerb from '@/utils/getToBeVerb'
   import { TOneOfTenses } from '@/types'
+  import capitalize from 'lodash/capitalize'
 
   const AppProps = Vue.extend({
     props: {
@@ -63,6 +69,8 @@
   @Component
 
   export default class Tense extends AppProps {
+    capitalize = capitalize
+
     get convertedVerb (): string {
       const {
         verb,
@@ -85,6 +93,7 @@
 
       return camelCase(`${time}_${tense.join('_')}`) as TOneOfTenses
     }
+
     get auxiliary () {
       const {
         camelCaseTense,
@@ -118,7 +127,7 @@
       return suitableAuxiliary
     }
 
-    get order () {
+    get rawOrder () {
       const {
         camelCaseTense,
         phraseForm
@@ -127,7 +136,24 @@
       return _get(phraseSequentor, [camelCaseTense, phraseForm], ['pronoun', 'pronoun', 'pronoun'])
     }
 
-    get phraseObject () {
+    get order () {
+      const {
+        camelCaseTense,
+        phraseForm
+      } = this
+
+      const ordr: TPhraseOrder = _get(phraseSequentor, [camelCaseTense, phraseForm], ['pronoun', 'pronoun', 'pronoun'])
+
+      return ordr.filter((key) => this.phraseObject[key])
+    }
+
+    get phraseObject (): {
+      pronoun: string,
+      mainVerb: string,
+      auxiliary: string,
+      have: string,
+      toBe: string
+    } {
       const {
         convertedPronoun,
         convertedVerb,
@@ -136,15 +162,17 @@
         toBeVerb
       } = this
 
-      return {
+      const almostReady = {
         pronoun: convertedPronoun,
         mainVerb: convertedVerb,
         auxiliary: auxiliary,
         have: secondAuxiliary,
         toBe: toBeVerb
       }
+
+      return almostReady
     }
   }
 </script>
 
-<style lang="scss" src="./index.scss"></style>
+<style scoped lang="scss" src="./index.scss"></style>

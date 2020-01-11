@@ -18,4 +18,4 @@
     }
   }
 </script>
-<style src="./index.scss" lang="scss"></style>
+<style scoped src="./index.scss" lang="scss"></style>

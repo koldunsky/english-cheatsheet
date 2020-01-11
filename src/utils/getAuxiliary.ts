@@ -40,32 +40,21 @@ const presentSimple: ITense = {
   }
 }
 
-const presentPerfect: ITense = {
-  affirmative: {
-    first: 'have',
-    second: 'have',
-    third: 'has',
-    third_plural: 'have'
-  },
-  negative: {
-    first: `haven't (have not)`,
-    second: `haven't (have not)`,
-    third: `hasn't (has not)`,
-    third_plural: `haven't (have not)`
-  },
-  get interrogative () {
-    return {
-      first: 'have',
-      second: 'have',
-      third: 'has',
-      third_plural: 'have'
-    }
-  }
+const pastSimple: ITense = {
+  affirmative: oneForAll(''),
+  negative: oneForAll(`didn't`),
+  interrogative: oneForAll('did')
+}
+
+const pastContinuous: ITense = {
+  affirmative: oneForAll(''),
+  negative: oneForAll(``),
+  interrogative: oneForAll('did')
 }
 
 const pastPerfect: ITense = {
-  affirmative: oneForAll('had'),
-  negative: oneForAll(`hadn't`),
+  affirmative: oneForAll(''),
+  negative: oneForAll(``),
   get interrogative () {
     return this.affirmative
   }
@@ -106,11 +95,11 @@ const futurePerfectContinuous: ITense = {
 export default {
   presentSimple,
   // presentContinuous,
-  presentPerfect,
+  // presentPerfect,
   // presentPerfectContinuous,
 
-  // pastSimple,
-  // pastContinuous,
+  pastSimple,
+  pastContinuous,
   pastPerfect,
   // pastPerfectContinuous,
 

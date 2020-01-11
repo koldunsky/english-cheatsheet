@@ -10,6 +10,29 @@ const oneForAll = (word: string): IPronoun => ({
   third_plural: word
 })
 
+const presentPerfect: ITense = {
+  affirmative: {
+    first: 'have',
+    second: 'have',
+    third: 'has',
+    third_plural: 'have'
+  },
+  negative: {
+    first: `haven't`,
+    second: `haven't`,
+    third: `hasn't`,
+    third_plural: `haven't`
+  },
+  get interrogative () {
+    return {
+      first: 'have',
+      second: 'have',
+      third: 'has',
+      third_plural: 'have'
+    }
+  }
+}
+
 const presentPerfectContinuous: ITense = {
   affirmative: {
     first: 'have',
@@ -41,14 +64,6 @@ const pastPerfectContinuous: ITense = {
   }
 }
 
-const presentPerfect: ITense = {
-  affirmative: oneForAll('have'),
-  negative: oneForAll(`haven't`),
-  get interrogative () {
-    return this.affirmative
-  }
-}
-
 const pastPerfect: ITense = {
   affirmative: oneForAll('had'),
   negative: oneForAll(`hadn't`),
@@ -67,7 +82,7 @@ const futurePerfect: ITense = {
 
 const futurePerfectContinuous: ITense = {
   affirmative: oneForAll('have'),
-  negative: oneForAll('have'),
+  negative: oneForAll(`have`),
   get interrogative () {
     return this.affirmative
   }

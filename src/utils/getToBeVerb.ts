@@ -89,20 +89,10 @@ const pastPerfectContinuous: ITense = {
   }
 }
 
-const futureSimple: ITense = {
-  affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
-  get interrogative () {
-    return this.affirmative
-  }
-}
-
 const futureContinuous: ITense = {
-  affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
-  get interrogative () {
-    return this.affirmative
-  }
+  affirmative: oneForAll(''),
+  negative: oneForAll('be'),
+  interrogative: oneForAll('be')
 }
 
 const futurePerfect: ITense = {
@@ -133,7 +123,7 @@ export default {
   pastPerfectContinuous,
 
   // futureSimple,
-  // futureContinuous,
+  futureContinuous,
   // futurePerfect,
   futurePerfectContinuous
 } as ITensesWithPhraseForms<IPronoun>
