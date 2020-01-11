@@ -36,7 +36,7 @@
   import convertPronoun from '@/utils/convertPronoun'
   import phraseSequentor from '@/utils/phraseSequentor'
   import getAuxiliary from '@/utils/getAuxiliary'
-  import getSecondAuxiliary from '@/utils/getSecondAuxiliary'
+  import getSecondAuxiliary from '@/utils/getPerfectAuxiliary'
   import getToBeVerb from '@/utils/getToBeVerb'
   import { TOneOfTenses } from '@/types'
 
@@ -131,26 +131,18 @@
       const {
         convertedPronoun,
         convertedVerb,
-        camelCaseTense,
         auxiliary,
         secondAuxiliary,
-        toBeVerb,
-        phraseForm
+        toBeVerb
       } = this
 
-      console.info(camelCaseTense, phraseForm, ': ', convertedPronoun, convertedVerb, auxiliary, toBeVerb, secondAuxiliary)
-      console.info('======')
-      const phraseObject = {
+      return {
         pronoun: convertedPronoun,
         mainVerb: convertedVerb,
         auxiliary: auxiliary,
         have: secondAuxiliary,
         toBe: toBeVerb
       }
-
-      console.info(phraseObject)
-
-      return phraseObject
     }
   }
 </script>

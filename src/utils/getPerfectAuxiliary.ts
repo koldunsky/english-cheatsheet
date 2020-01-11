@@ -40,14 +40,6 @@ const pastPerfectContinuous: ITense = {
     return this.affirmative
   }
 }
-//
-// const futureContinuous: ITense = {
-//   affirmative: oneForAll('be'),
-//   negative: oneForAll('be'),
-//   get interrogative () {
-//     return this.affirmative
-//   }
-// }
 
 const presentPerfect: ITense = {
   affirmative: oneForAll('have'),
@@ -82,11 +74,6 @@ const futurePerfectContinuous: ITense = {
 }
 
 export default {
-  // presentPerfectContinuous,
-  //
-  // pastPerfectContinuous,
-  //
-  // futureContinuous,
   presentPerfect,
   presentPerfectContinuous,
 
