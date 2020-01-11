@@ -1,4 +1,22 @@
+@import '../../assets/style/utils';
+
 .control {
-  height: 4rem;
+  height: 5rem;
   margin-right: 2rem;
+}
+
+.phrase-constructor {
+  background: lighten($background, 7%);
+  color: #abe;
+  font-family: inherit;
+
+  input,
+  select {
+    font-family: inherit;
+    background: inherit;
+    border: none;
+    outline: none;
+    color: inherit;
+    font-size: inherit;
+  }
 }

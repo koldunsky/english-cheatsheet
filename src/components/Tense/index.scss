@@ -1,6 +1,5 @@
 @import '../../assets/style/utils';
 
-$color: #12121c;
 $pad: 1em;
 
 .tense {
@@ -10,7 +9,7 @@ $pad: 1em;
   font-size: 2.4rem;
   display: flex;
   overflow: hidden;
-  background: $color;
+  background: $background;
 
   &:hover {
     z-index: 1;
@@ -107,4 +106,24 @@ $pad: 1em;
     background: currentColor;
     top: -.5rem;
   }
+}
+
+.word_type_pronoun {
+  color: aquamarine;
+}
+
+.word_type_auxiliary {
+  color: #ac89ff;
+}
+
+.word_type_mainVerb {
+  color: #ffe9f9;
+}
+
+.word_type_have {
+  color: #ffa724;
+}
+
+.word_type_toBe {
+  color: #ff000d;
 }

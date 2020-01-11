@@ -1,79 +1,84 @@
 import { IPhraseForms, ITensesWithPhraseForms } from '../types'
 
-type TSequentorFn = (pronoun: string, mainVerb: string, auxiliary?: string, have?: string, toBe?: string) => string;
+type TPhraseOrder = Array<'pronoun' | 'mainVerb' | 'auxiliary' | 'have' | 'toBe'>;
 
-interface IPhraseSequentorTense extends IPhraseForms<TSequentorFn> {}
+interface IPhraseSequentorTense extends IPhraseForms<TPhraseOrder> {}
 
-const affirmative: TSequentorFn = (pronoun, mainVerb, auxiliary, have, toBe) => (`${pronoun} ${auxiliary} ${have} ${toBe} ${mainVerb}`)
+const affirmative: TPhraseOrder = ['pronoun', 'auxiliary', 'have', 'toBe', 'mainVerb']
 
 const presentSimple: IPhraseSequentorTense = {
-  affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  affirmative: ['pronoun', 'mainVerb'],
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }
 
 const presentPerfect: IPhraseSequentorTense = {
-  affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  affirmative: ['pronoun', 'have', 'mainVerb'],
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }
 
 const presentContinuous: IPhraseSequentorTense = {
-  affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  affirmative: ['pronoun', 'toBe', 'mainVerb'],
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }
 
 const presentPerfectContinuous: IPhraseSequentorTense = {
   affirmative,
-  negative: (pronoun, auxiliary, mainVerb, toBe) => (`${pronoun} ${auxiliary} ${toBe} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb, toBe) => (`${auxiliary} ${pronoun} ${toBe} ${mainVerb}?`)
+  negative: ['pronoun', 'auxiliary', 'toBe', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'toBe', 'mainVerb']
 }
 
 const pastSimple: IPhraseSequentorTense = {
   affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }
 
 const pastContinuous: IPhraseSequentorTense = {
-  affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  affirmative: ['pronoun', 'toBe', 'mainVerb'],
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }
+
 const pastPerfect: IPhraseSequentorTense = {
-  affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  affirmative: ['pronoun', 'have', 'mainVerb'],
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }
+
 const pastPerfectContinuous: IPhraseSequentorTense = {
   affirmative,
-  negative: (pronoun, auxiliary, mainVerb, toBe) => (`${pronoun} ${auxiliary} ${toBe} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb, toBe) => (`${auxiliary} ${pronoun} ${toBe} ${mainVerb}?`)
+  negative: ['pronoun', 'auxiliary', 'toBe', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'toBe', 'mainVerb']
 }
 
 const futureSimple: IPhraseSequentorTense = {
   affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
-}
-const futureContinuous: IPhraseSequentorTense = {
-  affirmative,
-  negative: (pronoun, auxiliary, mainVerb, toBe) => (`${pronoun} ${auxiliary} ${toBe} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb, toBe) => (`${auxiliary} ${pronoun} ${toBe} ${mainVerb}?`)
-}
-const futurePerfect: IPhraseSequentorTense = {
-  affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
-}
-const futurePerfectContinuous: IPhraseSequentorTense = {
-  affirmative,
-  negative: (pronoun, auxiliary, mainVerb) => (`${pronoun} ${auxiliary} ${mainVerb}`),
-  interrogative: (pronoun, auxiliary, mainVerb) => (`${auxiliary} ${pronoun} ${mainVerb}?`)
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
 }
 
-const allTheStuff: ITensesWithPhraseForms<TSequentorFn> = {
+const futureContinuous: IPhraseSequentorTense = {
+  affirmative,
+  negative: ['auxiliary', 'pronoun', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'toBe', 'mainVerb']
+}
+
+const futurePerfect: IPhraseSequentorTense = {
+  affirmative,
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
+}
+
+const futurePerfectContinuous: IPhraseSequentorTense = {
+  affirmative,
+  negative: ['pronoun', 'auxiliary', 'mainVerb'],
+  interrogative: ['auxiliary', 'pronoun', 'mainVerb']
+}
+
+const allTheStuff: ITensesWithPhraseForms<TPhraseOrder> = {
   presentSimple,
   presentContinuous,
   presentPerfect,
