@@ -26,9 +26,9 @@ const presentContinuous: ITense = {
   },
   negative: {
     first: `am not`,
-    second: `aren't`,
-    third: `isn't`,
-    third_plural: `aren't`
+    second: `are not`,
+    third: `is not`,
+    third_plural: `are not`
   },
   get interrogative () {
     return this.affirmative
