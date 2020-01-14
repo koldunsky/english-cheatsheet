@@ -17,13 +17,13 @@ const pastSimple: IPhraseSequentorTense = {
 }
 
 const pastContinuous: IPhraseSequentorTense = {
-  affirmative: affirmative,
+  affirmative,
   negative: ['pronoun', 'toBe', 'mainVerb'],
   interrogative: ['toBe', 'pronoun', 'mainVerb']
 }
 
 const pastPerfect: IPhraseSequentorTense = {
-  affirmative: affirmative,
+  affirmative,
   negative: ['pronoun', 'have', 'mainVerb'],
   interrogative: interrogativePerfect
 }
@@ -35,19 +35,19 @@ const pastPerfectContinuous: IPhraseSequentorTense = {
 }
 
 const presentSimple: IPhraseSequentorTense = {
-  affirmative: ['pronoun', 'mainVerb'],
+  affirmative,
   negative: ['pronoun', 'auxiliary', 'mainVerb'],
   interrogative: interrogativeSimple
 }
 
 const presentContinuous: IPhraseSequentorTense = {
-  affirmative: ['pronoun', 'toBe', 'mainVerb'],
+  affirmative,
   negative: ['pronoun', 'toBe', 'mainVerb'],
   interrogative: ['toBe', 'pronoun', 'mainVerb']
 }
 
 const presentPerfect: IPhraseSequentorTense = {
-  affirmative: ['pronoun', 'have', 'mainVerb'],
+  affirmative,
   negative: ['pronoun', 'have', 'mainVerb'],
   interrogative: interrogativePerfect
 }

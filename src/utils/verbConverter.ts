@@ -25,10 +25,6 @@ const countVowels = (verb: string): number => {
 }
 
 export const lastShortVowel = (verb: string): boolean => {
-  if (verb === 'forget') {
-    debugger
-  }
-
   let weight = 0
   const lastVowelIndex = getLastVowelIndex(verb)
   const theCharAfterLastVowel = verb[lastVowelIndex + 1]
@@ -66,10 +62,6 @@ export const lastShortVowel = (verb: string): boolean => {
 }
 
 export const getContinuousForm = (verb: string): string => {
-  // if (verb === 'forget') {
-  //   debugger
-  // }
-
   if (verb.slice(-2) === 'ie') {
     return `${verb.slice(0, -2)}ying`
   }

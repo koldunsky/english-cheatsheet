@@ -25,10 +25,10 @@ const presentSimple: ITense = {
     third_plural: ''
   },
   negative: {
-    first: `don't`,
-    second: `don't`,
-    third: `doesn't`,
-    third_plural: `don't`
+    first: 'do not',
+    second: 'do not',
+    third: `does not`,
+    third_plural: 'do not'
   },
   get interrogative () {
     return {
@@ -42,27 +42,13 @@ const presentSimple: ITense = {
 
 const pastSimple: ITense = {
   affirmative: oneForAll(''),
-  negative: oneForAll(`didn't`),
+  negative: oneForAll('did not'),
   interrogative: oneForAll('did')
-}
-
-const pastContinuous: ITense = {
-  affirmative: oneForAll(''),
-  negative: oneForAll(``),
-  interrogative: oneForAll('did')
-}
-
-const pastPerfect: ITense = {
-  affirmative: oneForAll(''),
-  negative: oneForAll(``),
-  get interrogative () {
-    return this.affirmative
-  }
 }
 
 const futureSimple: ITense = {
   affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  negative: oneForAll('will not'),
   get interrogative () {
     return this.affirmative
   }
@@ -70,7 +56,7 @@ const futureSimple: ITense = {
 
 const futureContinuous: ITense = {
   affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  negative: oneForAll('will not'),
   get interrogative () {
     return this.affirmative
   }
@@ -78,7 +64,7 @@ const futureContinuous: ITense = {
 
 const futurePerfect: ITense = {
   affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  negative: oneForAll('will not'),
   get interrogative () {
     return this.affirmative
   }
@@ -86,7 +72,7 @@ const futurePerfect: ITense = {
 
 const futurePerfectContinuous: ITense = {
   affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  negative: oneForAll('will not'),
   get interrogative () {
     return this.affirmative
   }
@@ -94,14 +80,8 @@ const futurePerfectContinuous: ITense = {
 
 export default {
   presentSimple,
-  // presentContinuous,
-  // presentPerfect,
-  // presentPerfectContinuous,
 
   pastSimple,
-  pastContinuous,
-  pastPerfect,
-  // pastPerfectContinuous,
 
   futureSimple,
   futureContinuous,
