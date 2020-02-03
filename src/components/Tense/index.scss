@@ -15,23 +15,6 @@ $pad: 1em;
     z-index: 1;
   }
 }
-.tense_past {
-  //background: adjust-hue( $color, 65% );
-}
-.tense_present {
-  //background: $color;
-}
-.tense_future {
-  //background: adjust-hue( $color, -70% );
-}
-
-.tense_perfect {
-  text-decoration: underline;
-}
-
-.tense_continuous {
-  font-style: italic;
-}
 
 .front {
   @include stretch;
@@ -61,6 +44,7 @@ $pad: 1em;
 .icon {
   width: 0;
   height: 0;
+  margin-bottom: 10px;
 }
 
 .icon_future {
@@ -125,5 +109,14 @@ $pad: 1em;
 }
 
 .word_type_toBe {
-  color: #ff000d;
+  color: lighten(red, 15%);
+}
+
+// debug
+.sequence {
+  position: absolute;
+  top: calc(100% - 40px);
+  font-size: .7em;
+  font-family: courier;
+  color: #444;
 }

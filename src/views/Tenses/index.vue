@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<style lang="scss" src="./index.scss"></style>
+<style scoped lang="scss" src="./index.scss"></style>
 
 <script lang="ts">
   import Vue from 'vue'

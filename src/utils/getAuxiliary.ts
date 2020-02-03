@@ -25,10 +25,10 @@ const presentSimple: ITense = {
     third_plural: ''
   },
   negative: {
-    first: `don't`,
-    second: `don't`,
-    third: `doesn't`,
-    third_plural: `don't`
+    first: 'do not',
+    second: 'do not',
+    third: `does not`,
+    third_plural: 'do not'
   },
   get interrogative () {
     return {
@@ -40,40 +40,15 @@ const presentSimple: ITense = {
   }
 }
 
-const presentPerfect: ITense = {
-  affirmative: {
-    first: 'have',
-    second: 'have',
-    third: 'has',
-    third_plural: 'have'
-  },
-  negative: {
-    first: `haven't (have not)`,
-    second: `haven't (have not)`,
-    third: `hasn't (has not)`,
-    third_plural: `haven't (have not)`
-  },
-  get interrogative () {
-    return {
-      first: 'have',
-      second: 'have',
-      third: 'has',
-      third_plural: 'have'
-    }
-  }
-}
-
-const pastPerfect: ITense = {
-  affirmative: oneForAll('had'),
-  negative: oneForAll(`hadn't`),
-  get interrogative () {
-    return this.affirmative
-  }
+const pastSimple: ITense = {
+  affirmative: oneForAll(''),
+  negative: oneForAll('did not'),
+  interrogative: oneForAll('did')
 }
 
 const futureSimple: ITense = {
   affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  negative: oneForAll('will not'),
   get interrogative () {
     return this.affirmative
   }
@@ -81,7 +56,7 @@ const futureSimple: ITense = {
 
 const futureContinuous: ITense = {
   affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  negative: oneForAll('will not'),
   get interrogative () {
     return this.affirmative
   }
@@ -89,7 +64,7 @@ const futureContinuous: ITense = {
 
 const futurePerfect: ITense = {
   affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  negative: oneForAll('will not'),
   get interrogative () {
     return this.affirmative
   }
@@ -97,7 +72,7 @@ const futurePerfect: ITense = {
 
 const futurePerfectContinuous: ITense = {
   affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
+  negative: oneForAll('will not'),
   get interrogative () {
     return this.affirmative
   }
@@ -105,14 +80,8 @@ const futurePerfectContinuous: ITense = {
 
 export default {
   presentSimple,
-  // presentContinuous,
-  presentPerfect,
-  // presentPerfectContinuous,
 
-  // pastSimple,
-  // pastContinuous,
-  pastPerfect,
-  // pastPerfectContinuous,
+  pastSimple,
 
   futureSimple,
   futureContinuous,

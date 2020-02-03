@@ -26,9 +26,9 @@ const presentContinuous: ITense = {
   },
   negative: {
     first: `am not`,
-    second: `aren't`,
-    third: `isn't`,
-    third_plural: `aren't`
+    second: `are not`,
+    third: `is not`,
+    third_plural: `are not`
   },
   get interrogative () {
     return this.affirmative
@@ -43,24 +43,6 @@ const presentPerfectContinuous: ITense = {
   }
 }
 
-const pastSimple: ITense = {
-  affirmative: {
-    first: '',
-    second: '',
-    third: '',
-    third_plural: ''
-  },
-  negative: {
-    first: ``,
-    second: ``,
-    third: ``,
-    third_plural: ``
-  },
-  get interrogative () {
-    return this.affirmative
-  }
-}
-
 const pastContinuous: ITense = {
   affirmative: {
     first: 'was',
@@ -69,10 +51,10 @@ const pastContinuous: ITense = {
     third_plural: 'were'
   },
   negative: {
-    first: `wasn't`,
-    second: `weren't`,
-    third: `wasn't`,
-    third_plural: `weren't`
+    first: 'was not',
+    second: 'were not',
+    third: 'was not',
+    third_plural: 'were not'
   },
   get interrogative () {
     return this.affirmative
@@ -89,28 +71,10 @@ const pastPerfectContinuous: ITense = {
   }
 }
 
-const futureSimple: ITense = {
-  affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
-  get interrogative () {
-    return this.affirmative
-  }
-}
-
 const futureContinuous: ITense = {
-  affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
-  get interrogative () {
-    return this.affirmative
-  }
-}
-
-const futurePerfect: ITense = {
-  affirmative: oneForAll('will'),
-  negative: oneForAll(`won't`),
-  get interrogative () {
-    return this.affirmative
-  }
+  affirmative: oneForAll('be'),
+  negative: oneForAll('be'),
+  interrogative: oneForAll('be')
 }
 
 const futurePerfectContinuous: ITense = {
@@ -127,13 +91,9 @@ export default {
   presentContinuous,
   presentPerfectContinuous,
 
-  pastSimple,
   pastContinuous,
-  // pastPerfect,
   pastPerfectContinuous,
 
-  // futureSimple,
-  // futureContinuous,
-  // futurePerfect,
+  futureContinuous,
   futurePerfectContinuous
 } as ITensesWithPhraseForms<IPronoun>

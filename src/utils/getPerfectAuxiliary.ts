@@ -10,6 +10,35 @@ const oneForAll = (word: string): IPronoun => ({
   third_plural: word
 })
 
+const theOnlyOne = (word: string): ITense => ({
+  affirmative: oneForAll(word),
+  negative: oneForAll(word),
+  interrogative: oneForAll(word)
+})
+
+const presentPerfect: ITense = {
+  affirmative: {
+    first: 'have',
+    second: 'have',
+    third: 'has',
+    third_plural: 'have'
+  },
+  negative: {
+    first: 'have not',
+    second: 'have not',
+    third: 'has not',
+    third_plural: 'have not'
+  },
+  get interrogative () {
+    return {
+      first: 'have',
+      second: 'have',
+      third: 'has',
+      third_plural: 'have'
+    }
+  }
+}
+
 const presentPerfectContinuous: ITense = {
   affirmative: {
     first: 'have',
@@ -18,10 +47,10 @@ const presentPerfectContinuous: ITense = {
     third_plural: 'have'
   },
   negative: {
-    first: `haven't`,
-    second: `haven't`,
-    third: `hasn't`,
-    third_plural: `haven't`
+    first: 'have not',
+    second: 'have not',
+    third: 'has not',
+    third_plural: 'have not'
   },
   get interrogative () {
     return {
@@ -35,15 +64,7 @@ const presentPerfectContinuous: ITense = {
 
 const pastPerfectContinuous: ITense = {
   affirmative: oneForAll('had'),
-  negative: oneForAll(`hadn't`),
-  get interrogative () {
-    return this.affirmative
-  }
-}
-
-const presentPerfect: ITense = {
-  affirmative: oneForAll('have'),
-  negative: oneForAll(`haven't`),
+  negative: oneForAll('had not'),
   get interrogative () {
     return this.affirmative
   }
@@ -51,27 +72,15 @@ const presentPerfect: ITense = {
 
 const pastPerfect: ITense = {
   affirmative: oneForAll('had'),
-  negative: oneForAll(`hadn't`),
+  negative: oneForAll('had not'),
   get interrogative () {
     return this.affirmative
   }
 }
 
-const futurePerfect: ITense = {
-  affirmative: oneForAll('have'),
-  negative: oneForAll('have'),
-  get interrogative () {
-    return this.affirmative
-  }
-}
+const futurePerfect: ITense = theOnlyOne('have')
 
-const futurePerfectContinuous: ITense = {
-  affirmative: oneForAll('have'),
-  negative: oneForAll('have'),
-  get interrogative () {
-    return this.affirmative
-  }
-}
+const futurePerfectContinuous: ITense = theOnlyOne('have')
 
 export default {
   presentPerfect,
