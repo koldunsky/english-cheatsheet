@@ -36,7 +36,7 @@ describe('Adjective phrases are correct', () => {
       expect($div.get(0).innerText).to.eq('I will chill')
     })
     cy.get('.tense_future-continuous .content').should(($div) => {
-      expect($div.get(0).innerText).to.eq('I will chilling')
+      expect($div.get(0).innerText).to.eq('I will be chilling')
     })
     cy.get('.tense_future-perfect .content').should(($div) => {
       expect($div.get(0).innerText).to.eq('I will have chilled')
@@ -81,7 +81,7 @@ describe('Adjective phrases are correct', () => {
       expect($div.get(0).innerText).to.eq('You will chill')
     })
     cy.get('.tense_future-continuous .content').should(($div) => {
-      expect($div.get(0).innerText).to.eq('You will chilling')
+      expect($div.get(0).innerText).to.eq('You will be chilling')
     })
     cy.get('.tense_future-perfect .content').should(($div) => {
       expect($div.get(0).innerText).to.eq('You will have chilled')
@@ -126,7 +126,7 @@ describe('Adjective phrases are correct', () => {
       expect($div.get(0).innerText).to.eq('It will chill')
     })
     cy.get('.tense_future-continuous .content').should(($div) => {
-      expect($div.get(0).innerText).to.eq('It will chilling')
+      expect($div.get(0).innerText).to.eq('It will be chilling')
     })
     cy.get('.tense_future-perfect .content').should(($div) => {
       expect($div.get(0).innerText).to.eq('It will have chilled')
@@ -171,7 +171,7 @@ describe('Adjective phrases are correct', () => {
       expect($div.get(0).innerText).to.eq('They will chill')
     })
     cy.get('.tense_future-continuous .content').should(($div) => {
-      expect($div.get(0).innerText).to.eq('They will chilling')
+      expect($div.get(0).innerText).to.eq('They will be chilling')
     })
     cy.get('.tense_future-perfect .content').should(($div) => {
       expect($div.get(0).innerText).to.eq('They will have chilled')

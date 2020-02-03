@@ -72,7 +72,7 @@ const pastPerfectContinuous: ITense = {
 }
 
 const futureContinuous: ITense = {
-  affirmative: oneForAll(''),
+  affirmative: oneForAll('be'),
   negative: oneForAll('be'),
   interrogative: oneForAll('be')
 }
