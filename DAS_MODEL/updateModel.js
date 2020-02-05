@@ -55,19 +55,19 @@ const wordsWithDoubledConsonantIndexes = getDoubledIndexes()
 const wordsWithDoubledConsonantAmount = wordsWithDoubledConsonantIndexes.length
 
 const getBySyllable = () => {
-  const bySyllable = []
+  const bySyllable = {}
   firstForm.forEach((word, i) => {
-    const amountOfSyllables = countVowels(word)
-    if (!bySyllable[amountOfSyllables]) {
-      bySyllable[amountOfSyllables] = {}
+    const amountKey = countVowels(word)
+    if (!bySyllable[amountKey]) {
+      bySyllable[amountKey] = {}
     }
     const type = wordsWithDoubledConsonantIndexes.includes(i) ? 'doubled' : 'regular'
 
-    if (!bySyllable[amountOfSyllables][type]) {
-      bySyllable[amountOfSyllables][type] = 0
+    if (!bySyllable[amountKey][type]) {
+      bySyllable[amountKey][type] = 0
     }
 
-    bySyllable[amountOfSyllables][type]++
+    bySyllable[amountKey][type]++
   })
   return bySyllable
 }
