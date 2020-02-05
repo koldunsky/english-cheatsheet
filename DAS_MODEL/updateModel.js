@@ -1,3 +1,5 @@
+const findLastIndex = require('lodash/findLastIndex')
+
 const fs = require('fs')
 const path = require('path')
 const lodash = require('lodash')
@@ -5,6 +7,7 @@ const lodash = require('lodash')
 const firstForm = require('./data/firstForm.json')
 const secondForm = require('./data/secondForm.json')
 
+// UTILS
 const isVowel = (char) => {
   if (!char) {
     console.info(char)
@@ -22,6 +25,10 @@ const countVowels = (verb) => {
 
     return acc
   }, 0)
+}
+
+const getLastVowelIndex = (verb) => {
+  return findLastIndex(verb.split(''), isVowel)
 }
 
 const getDoubledIndexes = () => {
@@ -56,6 +63,7 @@ const wordsWithDoubledConsonantAmount = wordsWithDoubledConsonantIndexes.length
 
 const getBySyllable = () => {
   const bySyllable = {}
+
   firstForm.forEach((word, i) => {
     const amountKey = countVowels(word)
     if (!bySyllable[amountKey]) {
@@ -69,18 +77,78 @@ const getBySyllable = () => {
 
     bySyllable[amountKey][type]++
   })
+
   return bySyllable
 }
 
+const getByLength = () => {
+  const byLength = {}
+
+  firstForm.forEach((word, i) => {
+    const amountKey = word.length
+    if (!byLength[amountKey]) {
+      byLength[amountKey] = {}
+    }
+    const type = wordsWithDoubledConsonantIndexes.includes(i) ? 'doubled' : 'regular'
+
+    if (!byLength[amountKey][type]) {
+      byLength[amountKey][type] = 0
+    }
+
+    byLength[amountKey][type]++
+  })
+
+  return byLength
+}
+
+const getByRangeToTheEnd = () => {
+  const byRange = {}
+
+  firstForm.forEach((word, i) => {
+    const lastVowelIndex = getLastVowelIndex(word)
+    const amountKey = (word.length - lastVowelIndex)
+    if (!byRange[amountKey]) {
+      byRange[amountKey] = {}
+    }
+    const type = wordsWithDoubledConsonantIndexes.includes(i) ? 'doubled' : 'regular'
+
+    if (!byRange[amountKey][type]) {
+      byRange[amountKey][type] = 0
+    }
+
+    byRange[amountKey][type]++
+  })
+
+  return byRange
+}
+
+const getIsPreviousIsConsonant = () => {
+  const stat = {
+    regular: 0,
+    doubled: 0
+  }
+  firstForm.forEach((word, i) => {
+    const lastVowelIndex = getLastVowelIndex(word)
+    const charBefore = word[lastVowelIndex - 1]
+
+    if (charBefore && !isVowel(charBefore)) {
+      wordsWithDoubledConsonantIndexes[i] ? stat.doubled++ : stat.regular++
+    }
+  })
+
+  return stat
+}
+
 fs.writeFileSync(path.resolve(__dirname, 'meta', './doubledIndexes.json'), JSON.stringify({
-  wordsWithDoubledConsonant: {
-    indexes: wordsWithDoubledConsonantIndexes,
-    amount: wordsWithDoubledConsonantAmount
-  },
-  allWords: {
+  words: {
+    doubled: wordsWithDoubledConsonantAmount,
+    regular: firstForm.length - wordsWithDoubledConsonantAmount,
     amount: firstForm.length
   },
-  bySyllables: getBySyllable()
+  bySyllables: getBySyllable(),
+  consonantBeforeLastVowel: getIsPreviousIsConsonant(),
+  byLength: getByLength(),
+  byRangeToTheEndOfTheWord: getByRangeToTheEnd()
 }), function (err) {
   if (err) throw err
   console.log('Saved!')
