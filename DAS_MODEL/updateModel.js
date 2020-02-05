@@ -1,9 +1,30 @@
 const fs = require('fs')
 const path = require('path')
+const lodash = require('lodash')
+
 const firstForm = require('./data/firstForm.json')
 const secondForm = require('./data/secondForm.json')
 
-const updateDoubledIndexes = () => {
+const isVowel = (char) => {
+  if (!char) {
+    console.info(char)
+    console.trace()
+  }
+
+  return ['a', 'e', 'i', 'o', 'u'].includes(char.toLowerCase())
+}
+
+const countVowels = (verb) => {
+  return verb.split('').reduce((acc, char) => {
+    if (isVowel(char)) {
+      acc++
+    }
+
+    return acc
+  }, 0)
+}
+
+const getDoubledIndexes = () => {
   const doubledIndexes = []
 
   firstForm.forEach((word, index) => {
@@ -27,10 +48,40 @@ const updateDoubledIndexes = () => {
     }
   })
 
-  fs.writeFileSync(path.resolve(__dirname, 'meta', './doubledIndexes.json'), JSON.stringify(doubledIndexes), function (err) {
-    if (err) throw err
-    console.log('Saved!')
-  })
+  return doubledIndexes
 }
 
-updateDoubledIndexes()
+const wordsWithDoubledConsonantIndexes = getDoubledIndexes()
+const wordsWithDoubledConsonantAmount = wordsWithDoubledConsonantIndexes.length
+
+const getBySyllable = () => {
+  const bySyllable = []
+  firstForm.forEach((word, i) => {
+    const amountOfSyllables = countVowels(word)
+    if (!bySyllable[amountOfSyllables]) {
+      bySyllable[amountOfSyllables] = {}
+    }
+    const type = wordsWithDoubledConsonantIndexes.includes(i) ? 'doubled' : 'regular'
+
+    if (!bySyllable[amountOfSyllables][type]) {
+      bySyllable[amountOfSyllables][type] = 0
+    }
+
+    bySyllable[amountOfSyllables][type]++
+  })
+  return bySyllable
+}
+
+fs.writeFileSync(path.resolve(__dirname, 'meta', './doubledIndexes.json'), JSON.stringify({
+  wordsWithDoubledConsonant: {
+    indexes: wordsWithDoubledConsonantIndexes,
+    amount: wordsWithDoubledConsonantAmount
+  },
+  allWords: {
+    amount: firstForm.length
+  },
+  bySyllables: getBySyllable()
+}), function (err) {
+  if (err) throw err
+  console.log('Saved!')
+})
