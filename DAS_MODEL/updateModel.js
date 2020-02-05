@@ -110,6 +110,7 @@ const getByRangeToTheEnd = () => {
     if (!byRange[amountKey]) {
       byRange[amountKey] = {}
     }
+
     const type = wordsWithDoubledConsonantIndexes.includes(i) ? 'doubled' : 'regular'
 
     if (!byRange[amountKey][type]) {
@@ -149,7 +150,7 @@ fs.writeFileSync(path.resolve(__dirname, 'meta', './doubledIndexes.json'), JSON.
   consonantBeforeLastVowel: getIsPreviousIsConsonant(),
   byLength: getByLength(),
   byRangeToTheEndOfTheWord: getByRangeToTheEnd()
-}), function (err) {
+}, null, 2), function (err) {
   if (err) throw err
   console.log('Saved!')
 })
