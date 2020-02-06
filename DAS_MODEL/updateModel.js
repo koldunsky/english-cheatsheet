@@ -140,7 +140,7 @@ const getIsPreviousIsConsonant = () => {
   return stat
 }
 
-fs.writeFileSync(path.resolve(__dirname, 'meta', './doubledIndexes.json'), JSON.stringify({
+fs.writeFileSync(path.resolve(__dirname, 'meta', './wordStats.json'), JSON.stringify({
   words: {
     doubled: wordsWithDoubledConsonantAmount,
     regular: firstForm.length - wordsWithDoubledConsonantAmount,
