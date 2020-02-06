@@ -11,14 +11,13 @@ const getLHRatio = (doubledLocal, doubledGlobal, regularLocal, regularGlobal) =>
 
 const byAmount = (path) => {
   const result = {}
-  console.info(data[path])
+
   each(data[path], (localData, amount) => {
     const sylDoubled = g(localData, 'doubled')
     const dataDoubled = g(data, 'words.doubled')
     const sylRegular = g(localData, 'regular')
     const dataRegular = g(data, 'words.regular')
     result[amount] = getLHRatio(sylDoubled, dataDoubled, sylRegular, dataRegular)
-
   })
 
   return result
