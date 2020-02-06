@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const each = require('lodash/each')
 const get = require('lodash/get')
-const data = require('./meta/doubledIndexes.json')
+const data = require('./meta/wordStats')
 
 const g = (entity, path) => get(entity, path, 0.000000001)
 
