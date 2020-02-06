@@ -109,8 +109,8 @@
     }
   },
   "consonantBeforeLastVowel": {
-    "regular": 668,
-    "doubled": 62
+    "regular": 404,
+    "doubled": 44
   },
   "byLength": {
     "3": {

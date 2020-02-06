@@ -130,8 +130,11 @@ const getIsPreviousIsConsonant = () => {
   firstForm.forEach((word, i) => {
     const lastVowelIndex = getLastVowelIndex(word)
     const charBefore = word[lastVowelIndex - 1]
+    const charBeforeIsConsonant = charBefore && !isVowel(charBefore)
+    const charAfter = word[lastVowelIndex + 1]
+    const charAfterIsConsonant = charAfter && !isVowel(charAfter)
 
-    if (charBefore && !isVowel(charBefore)) {
+    if (charBeforeIsConsonant && charAfterIsConsonant) {
       wordsWithDoubledConsonantIndexes[i] ? stat.doubled++ : stat.regular++
     }
   })
