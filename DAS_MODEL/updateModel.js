@@ -2,7 +2,6 @@ const findLastIndex = require('lodash/findLastIndex')
 
 const fs = require('fs')
 const path = require('path')
-const lodash = require('lodash')
 
 const firstForm = require('./data/firstForm.json')
 const secondForm = require('./data/secondForm.json')
@@ -143,6 +142,7 @@ const getIsPreviousIsConsonant = () => {
 fs.writeFileSync(path.resolve(__dirname, 'meta', './wordStats.json'), JSON.stringify({
   words: {
     doubled: wordsWithDoubledConsonantAmount,
+    doubledIndexes: wordsWithDoubledConsonantIndexes,
     regular: firstForm.length - wordsWithDoubledConsonantAmount,
     amount: firstForm.length
   },
@@ -154,3 +154,9 @@ fs.writeFileSync(path.resolve(__dirname, 'meta', './wordStats.json'), JSON.strin
   if (err) throw err
   console.log('Saved!')
 })
+
+module.exports = {
+  isVowel,
+  countVowels,
+  getLastVowelIndex
+}
