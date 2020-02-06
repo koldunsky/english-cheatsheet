@@ -4,10 +4,18 @@ const each = require('lodash/each')
 const get = require('lodash/get')
 const data = require('./meta/wordStats')
 
-const g = (entity, path) => get(entity, path, 0.000000001)
+const g = (entity, path) => get(entity, path, 0.0001)
 
-const getLHRatio = (doubledLocal, doubledGlobal, regularLocal, regularGlobal) =>
-  Math.round((doubledLocal / doubledGlobal) / (regularLocal / regularGlobal) * 100) / 100
+const getLHRatio = (doubledLocal, doubledGlobal, regularLocal, regularGlobal) => {
+  const raw = (doubledLocal / doubledGlobal) / (regularLocal / regularGlobal)
+  const rounded = Math.round(raw * 100) / 100
+
+  if (rounded === 0) {
+    return 0.0001
+  }
+
+  return rounded
+}
 
 const byAmount = (path) => {
   const result = {}
@@ -30,12 +38,20 @@ const consonantBeforeLastVowel = getLHRatio(
   data.words.regular
 )
 
-fs.writeFileSync(path.resolve(__dirname, 'meta', './likehoodRatios.json'), JSON.stringify({
-  bySyllables: byAmount('bySyllables'),
-  byLength: byAmount('byLength'),
-  consonantBeforeLastVowel,
-  byRangeToTheEndOfTheWord: byAmount('byRangeToTheEndOfTheWord')
-}, null, 2), function (err) {
-  if (err) throw err
-  console.log('Saved!')
-})
+const update = () => {
+  fs.writeFileSync(path.resolve(__dirname, 'meta', './likehoodRatios.json'), JSON.stringify({
+    bySyllables: byAmount('bySyllables'),
+    byLength: byAmount('byLength'),
+    consonantBeforeLastVowel,
+    byRangeToTheEndOfTheWord: byAmount('byRangeToTheEndOfTheWord')
+  }, null, 2), function (err) {
+    if (err) throw err
+    console.log('Saved!')
+  })
+}
+
+update()
+
+module.exports = {
+  update
+}

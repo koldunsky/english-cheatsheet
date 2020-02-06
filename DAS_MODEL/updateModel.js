@@ -3,8 +3,8 @@ const findLastIndex = require('lodash/findLastIndex')
 const fs = require('fs')
 const path = require('path')
 
-const firstForm = require('./data/firstForm.json')
-const secondForm = require('./data/secondForm.json')
+const firstForm = require('./data/firstFormShort')
+const secondForm = require('./data/secondFormShort')
 
 // UTILS
 const isVowel = (char) => {
@@ -141,25 +141,53 @@ const getIsPreviousIsConsonant = () => {
 
   return stat
 }
+const update = () => {
+  fs.writeFileSync(path.resolve(__dirname, 'meta', './wordStats.json'), JSON.stringify({
+    words: {
+      doubled: wordsWithDoubledConsonantAmount,
+      doubledIndexes: wordsWithDoubledConsonantIndexes,
+      regular: firstForm.length - wordsWithDoubledConsonantAmount,
+      amount: firstForm.length
+    },
+    bySyllables: getBySyllable(),
+    consonantBeforeLastVowel: getIsPreviousIsConsonant(),
+    byLength: getByLength(),
+    byRangeToTheEndOfTheWord: getByRangeToTheEnd()
+  }, null, 2), function (err) {
+    if (err) throw err
+    console.log('Saved!')
+  })
+}
 
-fs.writeFileSync(path.resolve(__dirname, 'meta', './wordStats.json'), JSON.stringify({
-  words: {
-    doubled: wordsWithDoubledConsonantAmount,
-    doubledIndexes: wordsWithDoubledConsonantIndexes,
-    regular: firstForm.length - wordsWithDoubledConsonantAmount,
-    amount: firstForm.length
-  },
-  bySyllables: getBySyllable(),
-  consonantBeforeLastVowel: getIsPreviousIsConsonant(),
-  byLength: getByLength(),
-  byRangeToTheEndOfTheWord: getByRangeToTheEnd()
-}, null, 2), function (err) {
-  if (err) throw err
-  console.log('Saved!')
-})
+update()
 
 module.exports = {
   isVowel,
   countVowels,
-  getLastVowelIndex
+  getLastVowelIndex,
+  update
 }
+
+
+const azaza = () => {
+  const newArr = []
+  const newArr2 = []
+  firstForm.forEach((verb, i) => {
+    const lastChar = verb.charAt(verb.length - 1)
+    if (lastChar === 'e' || (lastChar === 'y' && !isVowel(verb.charAt(verb.length - 2)))) {
+      console.info(11)
+    } else {
+      newArr.push(verb)
+      newArr2.push(secondForm[i])
+    }
+  })
+  fs.writeFileSync(path.resolve(__dirname, 'data', './firstFormShort.json'), JSON.stringify(newArr, null, 2), function (err) {
+    if (err) throw err
+    console.log('Saved!')
+  })
+  fs.writeFileSync(path.resolve(__dirname, 'data', './secondFormShort.json'), JSON.stringify(newArr2, null, 2), function (err) {
+    if (err) throw err
+    console.log('Saved!')
+  })
+}
+azaza()
